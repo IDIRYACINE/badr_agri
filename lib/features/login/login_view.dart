@@ -1,6 +1,7 @@
-import 'package:badr_agri/ui/widgets/common/form_field/form_field.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
+import 'package:supabase_auth_ui/supabase_auth_ui.dart';
 
 import 'login_viewmodel.dart';
 
@@ -21,15 +22,23 @@ class LoginView extends StackedView<LoginViewModel> {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             const Text("TBD LOGO"),
-             AppFormField(label: "Email",onUpdate: viewModel.setEmail,),
-             AppFormField(label: "Password",onUpdate: viewModel.setPassword,),
-            OutlinedButton(
-              onPressed: viewModel.login,
-              child: const Text("Login"),
-            ),
-            OutlinedButton(
-              onPressed: viewModel.register,
-              child: const Text("Register"),
+            SupaEmailAuth(
+              redirectTo: kIsWeb ? null : 'io.mydomain.myapp://callback',
+              onSignInComplete: viewModel.onLogin,
+              onSignUpComplete: viewModel.onSignup,
+              metadataFields: [
+                MetaDataField(
+                  prefixIcon: const Icon(Icons.person),
+                  label: 'Username',
+                  key: 'username',
+                  validator: (val) {
+                    if (val == null || val.isEmpty) {
+                      return 'Please enter something';
+                    }
+                    return null;
+                  },
+                ),
+              ],
             )
           ],
         ),
