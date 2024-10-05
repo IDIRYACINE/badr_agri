@@ -42,7 +42,9 @@ import 'package:badr_agri/features/map_location/map_location_view.dart';
 // @stacked-route
   ],
   dependencies: [
-    LazySingleton(classType: BottomSheetService),
+    LazySingleton(
+      classType: BottomSheetService,
+    ),
     LazySingleton(classType: DialogService),
     LazySingleton(classType: NavigationService),
     LazySingleton(classType: AuthService),

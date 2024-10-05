@@ -1,3 +1,6 @@
 import 'package:stacked/stacked.dart';
 
-class FormFieldModel extends BaseViewModel {}
+class AppFormFieldModel extends BaseViewModel {
+  
+  AppFormFieldModel();
+}
