@@ -1,3 +1,4 @@
+import 'package:badr_agri/features/garden_screen/widgets/garden_card.dart';
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 
@@ -16,7 +17,14 @@ class GardenScreenView extends StackedView<GardenScreenViewModel> {
       backgroundColor: Theme.of(context).colorScheme.surface,
       body: Container(
         padding: const EdgeInsets.only(left: 25.0, right: 25.0),
+        child: ListView.builder(
+          itemCount: viewModel.gardens.length,
+          itemBuilder: (context, index) =>
+              GardenCard(garden: viewModel.gardens[index]),
+        ),
       ),
+      floatingActionButton: IconButton(
+          onPressed: viewModel.addGarden, icon: const Icon(Icons.add_circle)),
     );
   }
 

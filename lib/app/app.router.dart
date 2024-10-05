@@ -5,6 +5,7 @@
 // **************************************************************************
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
+import 'package:badr_agri/domain/garden.dart' as _i18;
 import 'package:badr_agri/features/garden_create/garden_create_view.dart'
     as _i8;
 import 'package:badr_agri/features/garden_report/garden_report_view.dart'
@@ -31,7 +32,7 @@ import 'package:badr_agri/ui/views/startup/startup_view.dart' as _i3;
 import 'package:flutter/material.dart' as _i17;
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart' as _i1;
-import 'package:stacked_services/stacked_services.dart' as _i18;
+import 'package:stacked_services/stacked_services.dart' as _i19;
 
 class Routes {
   static const homeView = '/home-view';
@@ -191,8 +192,10 @@ class StackedRouter extends _i1.RouterBase {
       );
     },
     _i9.GardenSectionsView: (data) {
+      final args = data.getArgs<GardenSectionsViewArguments>(nullOk: false);
       return _i17.MaterialPageRoute<dynamic>(
-        builder: (context) => const _i9.GardenSectionsView(),
+        builder: (context) =>
+            _i9.GardenSectionsView(key: args.key, garden: args.garden),
         settings: data,
       );
     },
@@ -247,7 +250,34 @@ class StackedRouter extends _i1.RouterBase {
   Map<Type, _i1.StackedRouteFactory> get pagesMap => _pagesMap;
 }
 
-extension NavigatorStateExtension on _i18.NavigationService {
+class GardenSectionsViewArguments {
+  const GardenSectionsViewArguments({
+    this.key,
+    required this.garden,
+  });
+
+  final _i17.Key? key;
+
+  final _i18.Garden garden;
+
+  @override
+  String toString() {
+    return '{"key": "$key", "garden": "$garden"}';
+  }
+
+  @override
+  bool operator ==(covariant GardenSectionsViewArguments other) {
+    if (identical(this, other)) return true;
+    return other.key == key && other.garden == garden;
+  }
+
+  @override
+  int get hashCode {
+    return key.hashCode ^ garden.hashCode;
+  }
+}
+
+extension NavigatorStateExtension on _i19.NavigationService {
   Future<dynamic> navigateToHomeView([
     int? routerId,
     bool preventDuplicates = true,
@@ -346,14 +376,17 @@ extension NavigatorStateExtension on _i18.NavigationService {
         transition: transition);
   }
 
-  Future<dynamic> navigateToGardenSectionsView([
+  Future<dynamic> navigateToGardenSectionsView({
+    _i17.Key? key,
+    required _i18.Garden garden,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
     Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
         transition,
-  ]) async {
+  }) async {
     return navigateTo<dynamic>(Routes.gardenSectionsView,
+        arguments: GardenSectionsViewArguments(key: key, garden: garden),
         id: routerId,
         preventDuplicates: preventDuplicates,
         parameters: parameters,
@@ -556,14 +589,17 @@ extension NavigatorStateExtension on _i18.NavigationService {
         transition: transition);
   }
 
-  Future<dynamic> replaceWithGardenSectionsView([
+  Future<dynamic> replaceWithGardenSectionsView({
+    _i17.Key? key,
+    required _i18.Garden garden,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
     Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
         transition,
-  ]) async {
+  }) async {
     return replaceWith<dynamic>(Routes.gardenSectionsView,
+        arguments: GardenSectionsViewArguments(key: key, garden: garden),
         id: routerId,
         preventDuplicates: preventDuplicates,
         parameters: parameters,

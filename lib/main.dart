@@ -12,7 +12,8 @@ Future<void> main() async {
   await setupLocator();
   setupDialogUi();
   setupBottomSheetUi();
-  await Supabase.initialize(url: Enviroment.supabaseUrl, anonKey: Enviroment.supabaseAnnonKey);
+  await Supabase.initialize(
+      url: Enviroment.supabaseUrl, anonKey: Enviroment.supabaseAnnonKey);
 
   runApp(const MainApp());
 }

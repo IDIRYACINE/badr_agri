@@ -6,7 +6,6 @@ import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 
 class LoginViewModel extends BaseViewModel {
-
   void onLogin(AuthResponse response) {
     if (response.user != null) {
       final navigationsService = locator<NavigationService>();

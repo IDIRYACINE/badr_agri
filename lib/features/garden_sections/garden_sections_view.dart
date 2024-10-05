@@ -1,10 +1,12 @@
+import 'package:badr_agri/domain/garden.dart';
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 
 import 'garden_sections_viewmodel.dart';
 
 class GardenSectionsView extends StackedView<GardenSectionsViewModel> {
-  const GardenSectionsView({Key? key}) : super(key: key);
+  final Garden garden;
+  const GardenSectionsView({Key? key, required this.garden}) : super(key: key);
 
   @override
   Widget builder(

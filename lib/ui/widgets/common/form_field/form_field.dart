@@ -7,7 +7,7 @@ class AppFormField extends StackedView<AppFormFieldModel> {
   final String label;
   final Function(String? value) onUpdate;
 
-  const AppFormField({super.key,required this.label , required this.onUpdate});
+  const AppFormField({super.key, required this.label, required this.onUpdate});
 
   @override
   Widget builder(
@@ -31,12 +31,12 @@ class AppFormField extends StackedView<AppFormFieldModel> {
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
-          borderSide:  BorderSide(
+          borderSide: BorderSide(
             color: Theme.of(context).colorScheme.primary,
             width: 2.5,
           ),
         ),
-        prefixIcon:  Icon(Icons.text_fields,
+        prefixIcon: Icon(Icons.text_fields,
             color: Theme.of(context).colorScheme.primary),
         hintText: label,
         hintStyle: const TextStyle(color: Colors.grey),
