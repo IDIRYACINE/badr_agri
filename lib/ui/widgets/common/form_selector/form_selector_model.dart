@@ -1,3 +1,11 @@
 import 'package:stacked/stacked.dart';
 
-class FormSelectorModel extends BaseViewModel {}
+class FormSelectorModel<T> extends BaseViewModel {
+  T? selection;
+
+
+  void updateSelection(T? value){
+    selection = value;
+    rebuildUi();
+  }
+}

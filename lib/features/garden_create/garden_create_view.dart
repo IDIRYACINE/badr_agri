@@ -1,3 +1,7 @@
+import 'package:badr_agri/domain/surface.dart';
+import 'package:badr_agri/features/garden_equipements/garden_equipements.dart';
+import 'package:badr_agri/ui/widgets/common/form_field/form_field.dart';
+import 'package:badr_agri/ui/widgets/common/form_selector/form_selector.dart';
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 
@@ -15,7 +19,37 @@ class GardenCreateView extends StackedView<GardenCreateViewModel> {
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.surface,
       body: Container(
-        padding: const EdgeInsets.only(left: 25.0, right: 25.0),
+        padding: const EdgeInsets.all(25.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          mainAxisSize: MainAxisSize.max,
+          children: [
+            AppFormField(
+              label: 'Name',
+              onUpdate: viewModel.setGardenName,
+            ),
+            Row(
+              children: [
+                Expanded(
+                  flex: 2,
+                  child: AppFormField(label: 'Surface', onUpdate: viewModel.setSurface)),
+                const Expanded(child:  SizedBox()),
+                Expanded(
+                  flex: 1,
+                  child: FormSelector(
+                      data: SurfaceType.values,
+                      readLabel: (v) => v.name,
+                      onChanged: viewModel.setSurfaceType),
+                )
+              ],
+            ),
+            SizedBox(
+              height: 100,
+              child: GardenEquipements(initialData: viewModel.equipements)),
+            OutlinedButton(
+                onPressed: viewModel.createGarden, child: const Text("Confirm"))
+          ],
+        ),
       ),
     );
   }

@@ -31,6 +31,6 @@ class AuthService {
   }
 
   bool isAuthenticated() {
-    return true ; //Supabase.instance.client.auth.currentUser != null;
+    return true; //Supabase.instance.client.auth.currentUser != null;
   }
 }

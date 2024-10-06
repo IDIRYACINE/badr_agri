@@ -30,7 +30,9 @@ class GardenCard extends StatelessWidget {
                   Text("${garden.surface.amount} ${garden.surface.type.name}")
                 ],
               ),
-              const SizedBox(height: 10,),
+              const SizedBox(
+                height: 10,
+              ),
               Text("Equipements : ${garden.equipements.length}")
             ],
           ),

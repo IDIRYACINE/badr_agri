@@ -5,10 +5,15 @@ import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 
 class GardenScreenViewModel extends BaseViewModel {
-  List<Garden> gardens = List.filled(3, Garden.mock());
+  List<Garden> gardens = [];
 
-  void addGarden() {
+  void addGarden() async {
     final nav = locator<NavigationService>();
-    nav.navigateToGardenCreateView();
+    final garden = await nav.navigateToGardenCreateView();
+    
+    if(garden != null){
+      gardens.add(garden);
+      rebuildUi();
+    }
   }
 }

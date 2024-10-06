@@ -8,7 +8,7 @@ class Garden {
   final String name;
   final GpsCoordinates coordinates;
   final Surface surface;
-  final List<Equipements> equipements;
+  final List<Equipement> equipements;
 
   Garden(
       {required this.name,
@@ -21,7 +21,7 @@ class Garden {
       {String? name,
       GpsCoordinates? coordinates,
       Surface? surface,
-      List<Equipements>? equipements,
+      List<Equipement>? equipements,
       String? id}) {
     return Garden(
       id: id ?? this.id,

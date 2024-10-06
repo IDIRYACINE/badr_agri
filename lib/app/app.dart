@@ -20,6 +20,7 @@ import 'package:badr_agri/infrastructure/auth_service.dart';
 import 'package:badr_agri/infrastructure/garden_service.dart';
 import 'package:badr_agri/infrastructure/tree_service.dart';
 import 'package:badr_agri/features/map_location/map_location_view.dart';
+import 'package:badr_agri/ui/dialogs/create_equipement/create_equipement_dialog.dart';
 // @stacked-import
 
 @StackedApp(
@@ -58,7 +59,8 @@ import 'package:badr_agri/features/map_location/map_location_view.dart';
   ],
   dialogs: [
     StackedDialog(classType: InfoAlertDialog),
-    // @stacked-dialog
+    StackedDialog(classType: CreateEquipementDialog),
+// @stacked-dialog
   ],
 )
 class App {}

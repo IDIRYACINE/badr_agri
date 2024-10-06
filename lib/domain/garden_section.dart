@@ -1,3 +1,1 @@
-class GardenSection {
-  
-}
+class GardenSection {}
