@@ -22,6 +22,7 @@ import 'package:badr_agri/infrastructure/tree_service.dart';
 import 'package:badr_agri/features/map_location/map_location_view.dart';
 import 'package:badr_agri/ui/dialogs/create_equipement/create_equipement_dialog.dart';
 import 'package:badr_agri/features/garden_section_create/garden_section_create_view.dart';
+import 'package:badr_agri/features/tree_details/tree_details_view.dart';
 // @stacked-import
 
 @StackedApp(
@@ -42,6 +43,7 @@ import 'package:badr_agri/features/garden_section_create/garden_section_create_v
     MaterialRoute(page: GardenReportView),
     MaterialRoute(page: MapLocationView),
     MaterialRoute(page: GardenSectionCreateView),
+    MaterialRoute(page: TreeDetailsView),
 // @stacked-route
   ],
   dependencies: [

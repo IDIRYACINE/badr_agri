@@ -1,3 +1,5 @@
+import 'package:badr_agri/domain/tree_history.dart';
+import 'package:badr_agri/ui/widgets/common/form_checkbox/form_checkbox.dart';
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 
@@ -12,12 +14,12 @@ class TreeMedicalHistoryView extends StackedView<TreeMedicalHistoryViewModel> {
     TreeMedicalHistoryViewModel viewModel,
     Widget? child,
   ) {
-    return Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.surface,
-      body: Container(
-        padding: const EdgeInsets.only(left: 25.0, right: 25.0),
-      ),
-    );
+    return ListView.builder(
+        itemCount: TreeHistory.possibleHistory.length,
+        itemBuilder: (ctx, index) => AppFormCheckbox(
+            data: TreeHistory.possibleHistory[index],
+            readLabel: (v) => v.name,
+            onChecked: viewModel.takeHistoryNote));
   }
 
   @override
