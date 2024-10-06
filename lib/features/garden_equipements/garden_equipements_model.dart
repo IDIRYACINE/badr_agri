@@ -9,8 +9,7 @@ class GardenEquipementsModel extends BaseViewModel {
 
   GardenEquipementsModel({required this.data});
 
-
-  void removeEquipement(Equipement equipement){
+  void removeEquipement(Equipement equipement) {
     data.remove(equipement);
   }
 

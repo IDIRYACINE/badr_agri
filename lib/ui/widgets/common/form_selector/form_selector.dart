@@ -25,9 +25,9 @@ class FormSelector<T> extends StackedView<FormSelectorModel> {
     return items;
   }
 
-  void handleSelection(FormSelectorModel viewModel,T? selection){
+  void handleSelection(FormSelectorModel viewModel, T? selection) {
     onChanged(selection);
-    viewModel.updateSelection(selection) ;
+    viewModel.updateSelection(selection);
   }
 
   @override
@@ -36,7 +36,10 @@ class FormSelector<T> extends StackedView<FormSelectorModel> {
     FormSelectorModel viewModel,
     Widget? child,
   ) {
-    return DropdownButton(items: buildItems(),value: viewModel.selection, onChanged: (e) => handleSelection(viewModel,e as T?));
+    return DropdownButton(
+        items: buildItems(),
+        value: viewModel.selection,
+        onChanged: (e) => handleSelection(viewModel, e as T?));
   }
 
   @override

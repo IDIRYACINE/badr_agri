@@ -10,8 +10,8 @@ class GardenScreenViewModel extends BaseViewModel {
   void addGarden() async {
     final nav = locator<NavigationService>();
     final garden = await nav.navigateToGardenCreateView();
-    
-    if(garden != null){
+
+    if (garden != null) {
       gardens.add(garden);
       rebuildUi();
     }

@@ -31,9 +31,10 @@ class GardenCreateView extends StackedView<GardenCreateViewModel> {
             Row(
               children: [
                 Expanded(
-                  flex: 2,
-                  child: AppFormField(label: 'Surface', onUpdate: viewModel.setSurface)),
-                const Expanded(child:  SizedBox()),
+                    flex: 2,
+                    child: AppFormField(
+                        label: 'Surface', onUpdate: viewModel.setSurface)),
+                const Expanded(child: SizedBox()),
                 Expanded(
                   flex: 1,
                   child: FormSelector(
@@ -44,8 +45,8 @@ class GardenCreateView extends StackedView<GardenCreateViewModel> {
               ],
             ),
             SizedBox(
-              height: 100,
-              child: GardenEquipements(initialData: viewModel.equipements)),
+                height: 100,
+                child: GardenEquipements(initialData: viewModel.equipements)),
             OutlinedButton(
                 onPressed: viewModel.createGarden, child: const Text("Confirm"))
           ],
