@@ -17,7 +17,7 @@ import 'package:badr_agri/features/tree_qr_scan/tree_qr_scan_view.dart';
 import 'package:badr_agri/features/tree_medical_history/tree_medical_history_view.dart';
 import 'package:badr_agri/features/garden_report/garden_report_view.dart';
 import 'package:badr_agri/infrastructure/auth_service.dart';
-import 'package:badr_agri/infrastructure/garden_service.dart';
+import 'package:badr_agri/infrastructure/database_service.dart';
 import 'package:badr_agri/infrastructure/tree_service.dart';
 import 'package:badr_agri/features/map_location/map_location_view.dart';
 import 'package:badr_agri/ui/dialogs/create_equipement/create_equipement_dialog.dart';
@@ -53,7 +53,7 @@ import 'package:badr_agri/features/tree_details/tree_details_view.dart';
     LazySingleton(classType: DialogService),
     LazySingleton(classType: NavigationService),
     LazySingleton(classType: AuthService),
-    LazySingleton(classType: GardenService),
+    LazySingleton(classType: DatabaseService),
     LazySingleton(classType: TreeService),
 // @stacked-service
   ],

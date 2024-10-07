@@ -3,7 +3,7 @@ import 'package:mockito/mockito.dart';
 import 'package:badr_agri/app/app.locator.dart';
 import 'package:stacked_services/stacked_services.dart';
 import 'package:badr_agri/infrastructure/auth_service.dart';
-import 'package:badr_agri/infrastructure/garden_service.dart';
+import 'package:badr_agri/infrastructure/database_service.dart';
 import 'package:badr_agri/infrastructure/tree_service.dart';
 // @stacked-import
 
@@ -14,7 +14,7 @@ import 'test_helpers.mocks.dart';
   MockSpec<BottomSheetService>(onMissingStub: OnMissingStub.returnDefault),
   MockSpec<DialogService>(onMissingStub: OnMissingStub.returnDefault),
   MockSpec<AuthService>(onMissingStub: OnMissingStub.returnDefault),
-  MockSpec<GardenService>(onMissingStub: OnMissingStub.returnDefault),
+  MockSpec<DatabaseService>(onMissingStub: OnMissingStub.returnDefault),
   MockSpec<TreeService>(onMissingStub: OnMissingStub.returnDefault),
 // @stacked-mock-spec
 ])
@@ -23,7 +23,6 @@ void registerServices() {
   getAndRegisterBottomSheetService();
   getAndRegisterDialogService();
   getAndRegisterAuthService();
-  getAndRegisterGardenService();
   getAndRegisterTreeService();
 // @stacked-mock-register
 }
@@ -85,12 +84,6 @@ MockAuthService getAndRegisterAuthService() {
   return service;
 }
 
-MockGardenService getAndRegisterGardenService() {
-  _removeRegistrationIfExists<GardenService>();
-  final service = MockGardenService();
-  locator.registerSingleton<GardenService>(service);
-  return service;
-}
 
 MockTreeService getAndRegisterTreeService() {
   _removeRegistrationIfExists<TreeService>();
