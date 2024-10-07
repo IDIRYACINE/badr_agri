@@ -19,7 +19,8 @@ part 'database.g.dart';
   GardenSections,
   SectionLines,
   CultureTypes,
-  Equipements
+  Equipements,
+  Users
 ])
 class AppDatabase extends _$AppDatabase {
   // After generating code, this class needs to define a `schemaVersion` getter

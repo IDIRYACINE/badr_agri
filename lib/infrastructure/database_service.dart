@@ -1,7 +1,18 @@
-import 'package:drift/drift.dart';
+
+import 'package:badr_agri/infrastructure/database/repostiroy.dart';
 
 import 'database/database.dart';
 
 class DatabaseService {
-  final AppDatabase database = AppDatabase();
+  late  AppDatabase database = AppDatabase();
+
+  late DatabaseRepository repository;
+
+  void init(){
+    repository = DatabaseRepository(database);
+  }
+
+  String? userId;
+
+
 }
