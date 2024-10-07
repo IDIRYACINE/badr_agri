@@ -14,7 +14,6 @@ Future<void> main() async {
   setupBottomSheetUi();
   await Supabase.initialize(
       url: Enviroment.supabaseUrl, anonKey: Enviroment.supabaseAnnonKey);
-
   runApp(const MainApp());
 }
 

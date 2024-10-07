@@ -59,4 +59,9 @@ class GardenSectionCreateViewModel extends BaseViewModel {
 
     navigationService.back(result: section);
   }
+
+  void cancel() {
+    final navigationService = locator<NavigationService>();
+    navigationService.back(result: null);
+  }
 }

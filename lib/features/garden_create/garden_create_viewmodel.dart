@@ -49,7 +49,8 @@ class GardenCreateViewModel extends BaseViewModel {
         id: "id",
         coordinates: GpsCoordinates(latitude: 0, longitude: 0),
         surface: Surface(amount: surface ?? 20, type: type ?? SurfaceType.km),
-        equipements: equipements);
+        equipements: equipements,
+        sections: []);
 
     navigationService.back(result: garden);
   }

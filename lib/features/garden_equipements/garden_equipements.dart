@@ -17,9 +17,15 @@ class GardenEquipements extends StackedView<GardenEquipementsModel> {
   ) {
     return Column(
       children: [
-        IconButton(
-            onPressed: viewModel.addEquipement,
-            icon: const Icon(Icons.add_circle_outline)),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            const Text("Equipements"),
+            IconButton(
+                onPressed: viewModel.addEquipement,
+                icon: const Icon(Icons.add_circle_outline)),
+          ],
+        ),
         Expanded(
           child: ListView.builder(
             itemCount: viewModel.data.length,

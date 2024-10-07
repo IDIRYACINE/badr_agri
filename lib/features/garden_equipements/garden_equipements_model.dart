@@ -1,6 +1,6 @@
+import 'package:badr_agri/app/app.dialogs.dart';
 import 'package:badr_agri/app/app.locator.dart';
 import 'package:badr_agri/domain/equipements.dart';
-import 'package:badr_agri/ui/dialogs/create_equipement/create_equipement_dialog.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 
@@ -17,8 +17,9 @@ class GardenEquipementsModel extends BaseViewModel {
     final dialogSerivce = locator<DialogService>();
 
     dialogSerivce.showCustomDialog(
-        variant: CreateEquipementDialog(
-            request: DialogRequest(), completer: onEquipementDialogResponse));
+      variant: DialogType.createEquipement,
+    );
+
   }
 
   onEquipementDialogResponse(DialogResponse res) {

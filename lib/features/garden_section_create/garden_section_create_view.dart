@@ -21,6 +21,7 @@ class GardenSectionCreateView
       body: Container(
         padding: const EdgeInsets.all(25.0),
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             FormSelector(
                 data: PlantingMode.modes,
@@ -38,7 +39,18 @@ class GardenSectionCreateView
                 label: "number of trees", onUpdate: viewModel.setTreeCount),
             AppFormField(label: "trees age ", onUpdate: viewModel.setTreeAges),
             AppFormField(
-                label: "number of lines ", onUpdate: viewModel.setLinesCount)
+                label: "number of lines ", onUpdate: viewModel.setLinesCount),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                OutlinedButton(
+                    onPressed: viewModel.cancel,
+                    child: const Text("Cancel")),
+                OutlinedButton(
+                    onPressed: viewModel.createSection,
+                    child: const Text("Confirm"))
+              ],
+            )
           ],
         ),
       ),

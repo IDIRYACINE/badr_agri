@@ -15,7 +15,7 @@ class TreeType {
   final String id;
   final String name;
 
-  static List<TreeType> types = [];
+  static List<TreeType> types = [TreeType(id: "id", name: "name")];
 
   TreeType({required this.id, required this.name});
 }
@@ -24,7 +24,7 @@ class TreeSubType {
   final String id;
   final String name;
 
-  static List<TreeSubType> types = [];
+  static List<TreeSubType> types = [TreeSubType(id: "id", name: "name")];
 
   TreeSubType({required this.id, required this.name});
 }

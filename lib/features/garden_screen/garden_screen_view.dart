@@ -23,7 +23,7 @@ class GardenScreenView extends StackedView<GardenScreenViewModel> {
               GardenCard(garden: viewModel.gardens[index]),
         ),
       ),
-      floatingActionButton: IconButton(
+      floatingActionButton: IconButton.filled(
           onPressed: viewModel.addGarden, icon: const Icon(Icons.add_circle)),
     );
   }
