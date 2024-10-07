@@ -19,7 +19,6 @@ class GardenEquipementsModel extends BaseViewModel {
     dialogSerivce.showCustomDialog(
       variant: DialogType.createEquipement,
     );
-
   }
 
   onEquipementDialogResponse(DialogResponse res) {

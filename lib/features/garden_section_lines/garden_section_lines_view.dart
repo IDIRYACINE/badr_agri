@@ -1,4 +1,5 @@
 import 'package:badr_agri/domain/garden_section.dart';
+import 'package:badr_agri/features/garden_section_lines/widgets/garden_section_line_card.dart';
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 
@@ -19,6 +20,10 @@ class GardenSectionLinesView extends StackedView<GardenSectionLinesViewModel> {
       backgroundColor: Theme.of(context).colorScheme.surface,
       body: Container(
         padding: const EdgeInsets.all(25.0),
+        child: ListView.builder(
+            itemCount: gardenSection.lines.length,
+            itemBuilder: (ctx, index) =>
+                SectionLineCard(sectionLine: gardenSection.lines[index])),
       ),
     );
   }

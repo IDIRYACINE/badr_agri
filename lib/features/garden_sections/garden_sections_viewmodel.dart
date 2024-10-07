@@ -7,7 +7,9 @@ import 'package:stacked_services/stacked_services.dart';
 class GardenSectionsViewModel extends BaseViewModel {
   final List<GardenSection> sections;
 
-  GardenSectionsViewModel({required this.sections, });
+  GardenSectionsViewModel({
+    required this.sections,
+  });
 
   void addGardenSection() async {
     final navigationService = locator<NavigationService>();
@@ -16,7 +18,6 @@ class GardenSectionsViewModel extends BaseViewModel {
         await navigationService.navigateToGardenSectionCreateView();
     if (gardenSection is GardenSection) {
       rebuildUi();
-
     }
   }
 }

@@ -248,8 +248,10 @@ class StackedRouter extends _i1.RouterBase {
       );
     },
     _i14.TreeMedicalHistoryView: (data) {
+      final args = data.getArgs<TreeMedicalHistoryViewArguments>(nullOk: false);
       return _i19.MaterialPageRoute<dynamic>(
-        builder: (context) => const _i14.TreeMedicalHistoryView(),
+        builder: (context) =>
+            _i14.TreeMedicalHistoryView(tree: args.tree, key: args.key),
         settings: data,
       );
     },
@@ -366,6 +368,33 @@ class GardenSectionDetaillsViewArguments {
   @override
   int get hashCode {
     return key.hashCode ^ sectionLine.hashCode;
+  }
+}
+
+class TreeMedicalHistoryViewArguments {
+  const TreeMedicalHistoryViewArguments({
+    required this.tree,
+    this.key,
+  });
+
+  final _i22.Tree tree;
+
+  final _i19.Key? key;
+
+  @override
+  String toString() {
+    return '{"tree": "$tree", "key": "$key"}';
+  }
+
+  @override
+  bool operator ==(covariant TreeMedicalHistoryViewArguments other) {
+    if (identical(this, other)) return true;
+    return other.tree == tree && other.key == key;
+  }
+
+  @override
+  int get hashCode {
+    return tree.hashCode ^ key.hashCode;
   }
 }
 
@@ -576,14 +605,17 @@ extension NavigatorStateExtension on _i23.NavigationService {
         transition: transition);
   }
 
-  Future<dynamic> navigateToTreeMedicalHistoryView([
+  Future<dynamic> navigateToTreeMedicalHistoryView({
+    required _i22.Tree tree,
+    _i19.Key? key,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
     Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
         transition,
-  ]) async {
+  }) async {
     return navigateTo<dynamic>(Routes.treeMedicalHistoryView,
+        arguments: TreeMedicalHistoryViewArguments(tree: tree, key: key),
         id: routerId,
         preventDuplicates: preventDuplicates,
         parameters: parameters,
@@ -828,14 +860,17 @@ extension NavigatorStateExtension on _i23.NavigationService {
         transition: transition);
   }
 
-  Future<dynamic> replaceWithTreeMedicalHistoryView([
+  Future<dynamic> replaceWithTreeMedicalHistoryView({
+    required _i22.Tree tree,
+    _i19.Key? key,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
     Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
         transition,
-  ]) async {
+  }) async {
     return replaceWith<dynamic>(Routes.treeMedicalHistoryView,
+        arguments: TreeMedicalHistoryViewArguments(tree: tree, key: key),
         id: routerId,
         preventDuplicates: preventDuplicates,
         parameters: parameters,

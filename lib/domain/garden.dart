@@ -32,7 +32,7 @@ class Garden {
       name: name ?? this.name,
       coordinates: coordinates ?? this.coordinates,
       surface: surface ?? this.surface,
-      equipements: equipements ?? this.equipements, 
+      equipements: equipements ?? this.equipements,
       sections: sections ?? this.sections,
     );
   }
@@ -44,7 +44,6 @@ class Garden {
         coordinates: GpsCoordinates(latitude: 0, longitude: 0),
         surface: Surface(amount: 23, type: SurfaceType.h),
         equipements: [],
-        sections: []
-        );
+        sections: []);
   }
 }

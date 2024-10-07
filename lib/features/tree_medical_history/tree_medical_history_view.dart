@@ -1,4 +1,5 @@
 import 'package:badr_agri/domain/tree_history.dart';
+import 'package:badr_agri/domain/tree_type.dart';
 import 'package:badr_agri/ui/widgets/common/form_checkbox/form_checkbox.dart';
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
@@ -6,7 +7,9 @@ import 'package:stacked/stacked.dart';
 import 'tree_medical_history_viewmodel.dart';
 
 class TreeMedicalHistoryView extends StackedView<TreeMedicalHistoryViewModel> {
-  const TreeMedicalHistoryView({Key? key}) : super(key: key);
+  final Tree tree;
+  const TreeMedicalHistoryView({required this.tree, Key? key})
+      : super(key: key);
 
   @override
   Widget builder(
@@ -26,5 +29,5 @@ class TreeMedicalHistoryView extends StackedView<TreeMedicalHistoryViewModel> {
   TreeMedicalHistoryViewModel viewModelBuilder(
     BuildContext context,
   ) =>
-      TreeMedicalHistoryViewModel();
+      TreeMedicalHistoryViewModel(histroy: tree.histroy);
 }

@@ -44,8 +44,7 @@ class GardenSectionCreateView
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 OutlinedButton(
-                    onPressed: viewModel.cancel,
-                    child: const Text("Cancel")),
+                    onPressed: viewModel.cancel, child: const Text("Cancel")),
                 OutlinedButton(
                     onPressed: viewModel.createSection,
                     child: const Text("Confirm"))

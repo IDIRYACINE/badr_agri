@@ -1,11 +1,15 @@
+import 'package:badr_agri/domain/tree_history.dart';
+
 class Tree {
   final String id;
   final int age;
   final TreeType type;
   final TreeSubType subType;
+  final List<TreeHistory> histroy;
 
   Tree(
       {required this.id,
+      required this.histroy,
       required this.age,
       required this.type,
       required this.subType});
