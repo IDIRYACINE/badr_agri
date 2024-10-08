@@ -5,37 +5,37 @@
 // **************************************************************************
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'package:badr_agri/domain/garden.dart' as _i20;
-import 'package:badr_agri/domain/garden_section.dart' as _i21;
-import 'package:badr_agri/domain/tree_type.dart' as _i22;
+import 'package:badr_agri/domain/garden.dart' as _i19;
+import 'package:badr_agri/domain/garden_section.dart' as _i20;
+import 'package:badr_agri/domain/tree_type.dart' as _i21;
 import 'package:badr_agri/features/garden_create/garden_create_view.dart'
     as _i8;
 import 'package:badr_agri/features/garden_report/garden_report_view.dart'
-    as _i15;
+    as _i14;
 import 'package:badr_agri/features/garden_screen/garden_screen_view.dart'
     as _i7;
 import 'package:badr_agri/features/garden_section_create/garden_section_create_view.dart'
-    as _i17;
+    as _i16;
 import 'package:badr_agri/features/garden_section_detaills/garden_section_detaills_view.dart'
-    as _i12;
-import 'package:badr_agri/features/garden_section_lines/garden_section_lines_view.dart'
     as _i11;
+import 'package:badr_agri/features/garden_section_lines/garden_section_lines_view.dart'
+    as _i10;
 import 'package:badr_agri/features/garden_sections/garden_sections_view.dart'
     as _i9;
 import 'package:badr_agri/features/login/login_view.dart' as _i4;
-import 'package:badr_agri/features/map_location/map_location_view.dart' as _i16;
+import 'package:badr_agri/features/map_location/map_location_view.dart' as _i15;
 import 'package:badr_agri/features/profile/profile_view.dart' as _i6;
 import 'package:badr_agri/features/signup/signup_view.dart' as _i5;
-import 'package:badr_agri/features/tree_details/tree_details_view.dart' as _i18;
+import 'package:badr_agri/features/tree_details/tree_details_view.dart' as _i17;
 import 'package:badr_agri/features/tree_medical_history/tree_medical_history_view.dart'
-    as _i14;
-import 'package:badr_agri/features/tree_qr_scan/tree_qr_scan_view.dart' as _i13;
+    as _i13;
+import 'package:badr_agri/features/tree_qr_scan/tree_qr_scan_view.dart' as _i12;
 import 'package:badr_agri/ui/views/home/home_view.dart' as _i2;
 import 'package:badr_agri/ui/views/startup/startup_view.dart' as _i3;
-import 'package:flutter/material.dart' as _i19;
+import 'package:flutter/material.dart' as _i18;
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart' as _i1;
-import 'package:stacked_services/stacked_services.dart' as _i23;
+import 'package:stacked_services/stacked_services.dart' as _i22;
 
 class Routes {
   static const homeView = '/home-view';
@@ -53,8 +53,6 @@ class Routes {
   static const gardenCreateView = '/garden-create-view';
 
   static const gardenSectionsView = '/garden-sections-view';
-
-  static const sectionCreateView = '/section-create-view';
 
   static const gardenSectionLinesView = '/garden-section-lines-view';
 
@@ -81,7 +79,6 @@ class Routes {
     gardenScreenView,
     gardenCreateView,
     gardenSectionsView,
-    sectionCreateView,
     gardenSectionLinesView,
     gardenSectionDetaillsView,
     treeQrScanView,
@@ -129,143 +126,143 @@ class StackedRouter extends _i1.RouterBase {
     ),
     _i1.RouteDef(
       Routes.gardenSectionLinesView,
-      page: _i11.GardenSectionLinesView,
+      page: _i10.GardenSectionLinesView,
     ),
     _i1.RouteDef(
       Routes.gardenSectionDetaillsView,
-      page: _i12.GardenSectionDetaillsView,
+      page: _i11.GardenSectionDetaillsView,
     ),
     _i1.RouteDef(
       Routes.treeQrScanView,
-      page: _i13.TreeQrScanView,
+      page: _i12.TreeQrScanView,
     ),
     _i1.RouteDef(
       Routes.treeMedicalHistoryView,
-      page: _i14.TreeMedicalHistoryView,
+      page: _i13.TreeMedicalHistoryView,
     ),
     _i1.RouteDef(
       Routes.gardenReportView,
-      page: _i15.GardenReportView,
+      page: _i14.GardenReportView,
     ),
     _i1.RouteDef(
       Routes.mapLocationView,
-      page: _i16.MapLocationView,
+      page: _i15.MapLocationView,
     ),
     _i1.RouteDef(
       Routes.gardenSectionCreateView,
-      page: _i17.GardenSectionCreateView,
+      page: _i16.GardenSectionCreateView,
     ),
     _i1.RouteDef(
       Routes.treeDetailsView,
-      page: _i18.TreeDetailsView,
+      page: _i17.TreeDetailsView,
     ),
   ];
 
   final _pagesMap = <Type, _i1.StackedRouteFactory>{
     _i2.HomeView: (data) {
-      return _i19.MaterialPageRoute<dynamic>(
+      return _i18.MaterialPageRoute<dynamic>(
         builder: (context) => const _i2.HomeView(),
         settings: data,
       );
     },
     _i3.StartupView: (data) {
-      return _i19.MaterialPageRoute<dynamic>(
+      return _i18.MaterialPageRoute<dynamic>(
         builder: (context) => const _i3.StartupView(),
         settings: data,
       );
     },
     _i4.LoginView: (data) {
-      return _i19.MaterialPageRoute<dynamic>(
+      return _i18.MaterialPageRoute<dynamic>(
         builder: (context) => const _i4.LoginView(),
         settings: data,
       );
     },
     _i5.SignupView: (data) {
-      return _i19.MaterialPageRoute<dynamic>(
+      return _i18.MaterialPageRoute<dynamic>(
         builder: (context) => const _i5.SignupView(),
         settings: data,
       );
     },
     _i6.ProfileView: (data) {
-      return _i19.MaterialPageRoute<dynamic>(
+      return _i18.MaterialPageRoute<dynamic>(
         builder: (context) => const _i6.ProfileView(),
         settings: data,
       );
     },
     _i7.GardenScreenView: (data) {
-      return _i19.MaterialPageRoute<dynamic>(
+      return _i18.MaterialPageRoute<dynamic>(
         builder: (context) => const _i7.GardenScreenView(),
         settings: data,
       );
     },
     _i8.GardenCreateView: (data) {
-      return _i19.MaterialPageRoute<dynamic>(
+      return _i18.MaterialPageRoute<dynamic>(
         builder: (context) => const _i8.GardenCreateView(),
         settings: data,
       );
     },
     _i9.GardenSectionsView: (data) {
       final args = data.getArgs<GardenSectionsViewArguments>(nullOk: false);
-      return _i19.MaterialPageRoute<dynamic>(
+      return _i18.MaterialPageRoute<dynamic>(
         builder: (context) =>
             _i9.GardenSectionsView(key: args.key, garden: args.garden),
         settings: data,
       );
     },
-    _i11.GardenSectionLinesView: (data) {
+    _i10.GardenSectionLinesView: (data) {
       final args = data.getArgs<GardenSectionLinesViewArguments>(nullOk: false);
-      return _i19.MaterialPageRoute<dynamic>(
-        builder: (context) => _i11.GardenSectionLinesView(
+      return _i18.MaterialPageRoute<dynamic>(
+        builder: (context) => _i10.GardenSectionLinesView(
             key: args.key, gardenSection: args.gardenSection),
         settings: data,
       );
     },
-    _i12.GardenSectionDetaillsView: (data) {
+    _i11.GardenSectionDetaillsView: (data) {
       final args =
           data.getArgs<GardenSectionDetaillsViewArguments>(nullOk: false);
-      return _i19.MaterialPageRoute<dynamic>(
-        builder: (context) => _i12.GardenSectionDetaillsView(
+      return _i18.MaterialPageRoute<dynamic>(
+        builder: (context) => _i11.GardenSectionDetaillsView(
             key: args.key, sectionLine: args.sectionLine),
         settings: data,
       );
     },
-    _i13.TreeQrScanView: (data) {
-      return _i19.MaterialPageRoute<dynamic>(
-        builder: (context) => const _i13.TreeQrScanView(),
+    _i12.TreeQrScanView: (data) {
+      return _i18.MaterialPageRoute<dynamic>(
+        builder: (context) => const _i12.TreeQrScanView(),
         settings: data,
       );
     },
-    _i14.TreeMedicalHistoryView: (data) {
+    _i13.TreeMedicalHistoryView: (data) {
       final args = data.getArgs<TreeMedicalHistoryViewArguments>(nullOk: false);
-      return _i19.MaterialPageRoute<dynamic>(
+      return _i18.MaterialPageRoute<dynamic>(
         builder: (context) =>
-            _i14.TreeMedicalHistoryView(tree: args.tree, key: args.key),
+            _i13.TreeMedicalHistoryView(tree: args.tree, key: args.key),
         settings: data,
       );
     },
-    _i15.GardenReportView: (data) {
-      return _i19.MaterialPageRoute<dynamic>(
-        builder: (context) => const _i15.GardenReportView(),
+    _i14.GardenReportView: (data) {
+      return _i18.MaterialPageRoute<dynamic>(
+        builder: (context) => const _i14.GardenReportView(),
         settings: data,
       );
     },
-    _i16.MapLocationView: (data) {
-      return _i19.MaterialPageRoute<dynamic>(
-        builder: (context) => const _i16.MapLocationView(),
+    _i15.MapLocationView: (data) {
+      return _i18.MaterialPageRoute<dynamic>(
+        builder: (context) => const _i15.MapLocationView(),
         settings: data,
       );
     },
-    _i17.GardenSectionCreateView: (data) {
-      return _i19.MaterialPageRoute<dynamic>(
-        builder: (context) => const _i17.GardenSectionCreateView(),
+    _i16.GardenSectionCreateView: (data) {
+      return _i18.MaterialPageRoute<dynamic>(
+        builder: (context) => const _i16.GardenSectionCreateView(),
         settings: data,
       );
     },
-    _i18.TreeDetailsView: (data) {
+    _i17.TreeDetailsView: (data) {
       final args = data.getArgs<TreeDetailsViewArguments>(nullOk: false);
-      return _i19.MaterialPageRoute<dynamic>(
+      return _i18.MaterialPageRoute<dynamic>(
         builder: (context) =>
-            _i18.TreeDetailsView(key: args.key, tree: args.tree),
+            _i17.TreeDetailsView(key: args.key, tree: args.tree),
         settings: data,
       );
     },
@@ -284,9 +281,9 @@ class GardenSectionsViewArguments {
     required this.garden,
   });
 
-  final _i19.Key? key;
+  final _i18.Key? key;
 
-  final _i20.Garden garden;
+  final _i19.Garden garden;
 
   @override
   String toString() {
@@ -311,9 +308,9 @@ class GardenSectionLinesViewArguments {
     required this.gardenSection,
   });
 
-  final _i19.Key? key;
+  final _i18.Key? key;
 
-  final _i21.GardenSection gardenSection;
+  final _i20.GardenSection gardenSection;
 
   @override
   String toString() {
@@ -338,9 +335,9 @@ class GardenSectionDetaillsViewArguments {
     required this.sectionLine,
   });
 
-  final _i19.Key? key;
+  final _i18.Key? key;
 
-  final _i21.SectionLine sectionLine;
+  final _i20.SectionLine sectionLine;
 
   @override
   String toString() {
@@ -365,9 +362,9 @@ class TreeMedicalHistoryViewArguments {
     this.key,
   });
 
-  final _i22.Tree tree;
+  final _i21.Tree tree;
 
-  final _i19.Key? key;
+  final _i18.Key? key;
 
   @override
   String toString() {
@@ -392,9 +389,9 @@ class TreeDetailsViewArguments {
     required this.tree,
   });
 
-  final _i19.Key? key;
+  final _i18.Key? key;
 
-  final _i22.Tree tree;
+  final _i21.Tree tree;
 
   @override
   String toString() {
@@ -413,7 +410,7 @@ class TreeDetailsViewArguments {
   }
 }
 
-extension NavigatorStateExtension on _i23.NavigationService {
+extension NavigatorStateExtension on _i22.NavigationService {
   Future<dynamic> navigateToHomeView([
     int? routerId,
     bool preventDuplicates = true,
@@ -513,8 +510,8 @@ extension NavigatorStateExtension on _i23.NavigationService {
   }
 
   Future<dynamic> navigateToGardenSectionsView({
-    _i19.Key? key,
-    required _i20.Garden garden,
+    _i18.Key? key,
+    required _i19.Garden garden,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
@@ -529,23 +526,9 @@ extension NavigatorStateExtension on _i23.NavigationService {
         transition: transition);
   }
 
-  Future<dynamic> navigateToSectionCreateView([
-    int? routerId,
-    bool preventDuplicates = true,
-    Map<String, String>? parameters,
-    Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
-        transition,
-  ]) async {
-    return navigateTo<dynamic>(Routes.sectionCreateView,
-        id: routerId,
-        preventDuplicates: preventDuplicates,
-        parameters: parameters,
-        transition: transition);
-  }
-
   Future<dynamic> navigateToGardenSectionLinesView({
-    _i19.Key? key,
-    required _i21.GardenSection gardenSection,
+    _i18.Key? key,
+    required _i20.GardenSection gardenSection,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
@@ -562,8 +545,8 @@ extension NavigatorStateExtension on _i23.NavigationService {
   }
 
   Future<dynamic> navigateToGardenSectionDetaillsView({
-    _i19.Key? key,
-    required _i21.SectionLine sectionLine,
+    _i18.Key? key,
+    required _i20.SectionLine sectionLine,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
@@ -594,8 +577,8 @@ extension NavigatorStateExtension on _i23.NavigationService {
   }
 
   Future<dynamic> navigateToTreeMedicalHistoryView({
-    required _i22.Tree tree,
-    _i19.Key? key,
+    required _i21.Tree tree,
+    _i18.Key? key,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
@@ -653,8 +636,8 @@ extension NavigatorStateExtension on _i23.NavigationService {
   }
 
   Future<dynamic> navigateToTreeDetailsView({
-    _i19.Key? key,
-    required _i22.Tree tree,
+    _i18.Key? key,
+    required _i21.Tree tree,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
@@ -768,8 +751,8 @@ extension NavigatorStateExtension on _i23.NavigationService {
   }
 
   Future<dynamic> replaceWithGardenSectionsView({
-    _i19.Key? key,
-    required _i20.Garden garden,
+    _i18.Key? key,
+    required _i19.Garden garden,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
@@ -784,23 +767,9 @@ extension NavigatorStateExtension on _i23.NavigationService {
         transition: transition);
   }
 
-  Future<dynamic> replaceWithSectionCreateView([
-    int? routerId,
-    bool preventDuplicates = true,
-    Map<String, String>? parameters,
-    Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
-        transition,
-  ]) async {
-    return replaceWith<dynamic>(Routes.sectionCreateView,
-        id: routerId,
-        preventDuplicates: preventDuplicates,
-        parameters: parameters,
-        transition: transition);
-  }
-
   Future<dynamic> replaceWithGardenSectionLinesView({
-    _i19.Key? key,
-    required _i21.GardenSection gardenSection,
+    _i18.Key? key,
+    required _i20.GardenSection gardenSection,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
@@ -817,8 +786,8 @@ extension NavigatorStateExtension on _i23.NavigationService {
   }
 
   Future<dynamic> replaceWithGardenSectionDetaillsView({
-    _i19.Key? key,
-    required _i21.SectionLine sectionLine,
+    _i18.Key? key,
+    required _i20.SectionLine sectionLine,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
@@ -849,8 +818,8 @@ extension NavigatorStateExtension on _i23.NavigationService {
   }
 
   Future<dynamic> replaceWithTreeMedicalHistoryView({
-    required _i22.Tree tree,
-    _i19.Key? key,
+    required _i21.Tree tree,
+    _i18.Key? key,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
@@ -908,8 +877,8 @@ extension NavigatorStateExtension on _i23.NavigationService {
   }
 
   Future<dynamic> replaceWithTreeDetailsView({
-    _i19.Key? key,
-    required _i22.Tree tree,
+    _i18.Key? key,
+    required _i21.Tree tree,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,

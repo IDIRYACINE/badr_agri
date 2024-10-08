@@ -33,7 +33,7 @@ class GardenSectionsViewModel extends BaseViewModel {
 
         for (Tree tree in line.trees) {
           await db.into(db.trees).insert(db_domain.TreesCompanion.insert(
-                id: line.id,
+                id: tree.id,
                 age: tree.age,
                 type: tree.type.name,
                 sectionLineId: line.id,
@@ -43,7 +43,7 @@ class GardenSectionsViewModel extends BaseViewModel {
           for (TreeHistory history in tree.histroy) {
             await db.into(db.treeHistories).insert(
                 db_domain.TreeHistoriesCompanion.insert(
-                    id: databaseService.uuid.v4(),
+                    id: history.id,
                     treeId: tree.id,
                     treeHistoryOptionId: history.id));
           }
@@ -52,6 +52,7 @@ class GardenSectionsViewModel extends BaseViewModel {
 
       await db.into(db.gardenSections).insert(
           db_domain.GardenSectionsCompanion.insert(
+              plantModeId: gardenSection.plantingMode.id,
               id: gardenSection.id,
               treeType: gardenSection.treeType.name,
               treeSubType: gardenSection.treeSubType.name,

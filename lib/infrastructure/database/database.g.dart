@@ -1639,6 +1639,196 @@ class GardensCompanion extends UpdateCompanion<Garden> {
   }
 }
 
+class $PlantingModesTable extends PlantingModes
+    with TableInfo<$PlantingModesTable, PlantingMode> {
+  @override
+  final GeneratedDatabase attachedDatabase;
+  final String? _alias;
+  $PlantingModesTable(this.attachedDatabase, [this._alias]);
+  static const VerificationMeta _idMeta = const VerificationMeta('id');
+  @override
+  late final GeneratedColumn<String> id = GeneratedColumn<String>(
+      'id', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _nameMeta = const VerificationMeta('name');
+  @override
+  late final GeneratedColumn<String> name = GeneratedColumn<String>(
+      'name', aliasedName, false,
+      additionalChecks:
+          GeneratedColumn.checkTextLength(minTextLength: 1, maxTextLength: 50),
+      type: DriftSqlType.string,
+      requiredDuringInsert: true);
+  @override
+  List<GeneratedColumn> get $columns => [id, name];
+  @override
+  String get aliasedName => _alias ?? actualTableName;
+  @override
+  String get actualTableName => $name;
+  static const String $name = 'planting_modes';
+  @override
+  VerificationContext validateIntegrity(Insertable<PlantingMode> instance,
+      {bool isInserting = false}) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('id')) {
+      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
+    } else if (isInserting) {
+      context.missing(_idMeta);
+    }
+    if (data.containsKey('name')) {
+      context.handle(
+          _nameMeta, name.isAcceptableOrUnknown(data['name']!, _nameMeta));
+    } else if (isInserting) {
+      context.missing(_nameMeta);
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {id};
+  @override
+  PlantingMode map(Map<String, dynamic> data, {String? tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return PlantingMode(
+      id: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}id'])!,
+      name: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}name'])!,
+    );
+  }
+
+  @override
+  $PlantingModesTable createAlias(String alias) {
+    return $PlantingModesTable(attachedDatabase, alias);
+  }
+}
+
+class PlantingMode extends DataClass implements Insertable<PlantingMode> {
+  final String id;
+  final String name;
+  const PlantingMode({required this.id, required this.name});
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    map['id'] = Variable<String>(id);
+    map['name'] = Variable<String>(name);
+    return map;
+  }
+
+  PlantingModesCompanion toCompanion(bool nullToAbsent) {
+    return PlantingModesCompanion(
+      id: Value(id),
+      name: Value(name),
+    );
+  }
+
+  factory PlantingMode.fromJson(Map<String, dynamic> json,
+      {ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return PlantingMode(
+      id: serializer.fromJson<String>(json['id']),
+      name: serializer.fromJson<String>(json['name']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'id': serializer.toJson<String>(id),
+      'name': serializer.toJson<String>(name),
+    };
+  }
+
+  PlantingMode copyWith({String? id, String? name}) => PlantingMode(
+        id: id ?? this.id,
+        name: name ?? this.name,
+      );
+  PlantingMode copyWithCompanion(PlantingModesCompanion data) {
+    return PlantingMode(
+      id: data.id.present ? data.id.value : this.id,
+      name: data.name.present ? data.name.value : this.name,
+    );
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('PlantingMode(')
+          ..write('id: $id, ')
+          ..write('name: $name')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode => Object.hash(id, name);
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is PlantingMode && other.id == this.id && other.name == this.name);
+}
+
+class PlantingModesCompanion extends UpdateCompanion<PlantingMode> {
+  final Value<String> id;
+  final Value<String> name;
+  final Value<int> rowid;
+  const PlantingModesCompanion({
+    this.id = const Value.absent(),
+    this.name = const Value.absent(),
+    this.rowid = const Value.absent(),
+  });
+  PlantingModesCompanion.insert({
+    required String id,
+    required String name,
+    this.rowid = const Value.absent(),
+  })  : id = Value(id),
+        name = Value(name);
+  static Insertable<PlantingMode> custom({
+    Expression<String>? id,
+    Expression<String>? name,
+    Expression<int>? rowid,
+  }) {
+    return RawValuesInsertable({
+      if (id != null) 'id': id,
+      if (name != null) 'name': name,
+      if (rowid != null) 'rowid': rowid,
+    });
+  }
+
+  PlantingModesCompanion copyWith(
+      {Value<String>? id, Value<String>? name, Value<int>? rowid}) {
+    return PlantingModesCompanion(
+      id: id ?? this.id,
+      name: name ?? this.name,
+      rowid: rowid ?? this.rowid,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (id.present) {
+      map['id'] = Variable<String>(id.value);
+    }
+    if (name.present) {
+      map['name'] = Variable<String>(name.value);
+    }
+    if (rowid.present) {
+      map['rowid'] = Variable<int>(rowid.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('PlantingModesCompanion(')
+          ..write('id: $id, ')
+          ..write('name: $name, ')
+          ..write('rowid: $rowid')
+          ..write(')'))
+        .toString();
+  }
+}
+
 class $GardenSectionsTable extends GardenSections
     with TableInfo<$GardenSectionsTable, GardenSection> {
   @override
@@ -1677,8 +1867,18 @@ class $GardenSectionsTable extends GardenSections
       requiredDuringInsert: true,
       defaultConstraints:
           GeneratedColumn.constraintIsAlways('REFERENCES gardens (id)'));
+  static const VerificationMeta _plantModeIdMeta =
+      const VerificationMeta('plantModeId');
   @override
-  List<GeneratedColumn> get $columns => [id, treeType, treeSubType, gardenId];
+  late final GeneratedColumn<String> plantModeId = GeneratedColumn<String>(
+      'plant_mode_id', aliasedName, false,
+      type: DriftSqlType.string,
+      requiredDuringInsert: true,
+      defaultConstraints:
+          GeneratedColumn.constraintIsAlways('REFERENCES planting_modes (id)'));
+  @override
+  List<GeneratedColumn> get $columns =>
+      [id, treeType, treeSubType, gardenId, plantModeId];
   @override
   String get aliasedName => _alias ?? actualTableName;
   @override
@@ -1714,6 +1914,14 @@ class $GardenSectionsTable extends GardenSections
     } else if (isInserting) {
       context.missing(_gardenIdMeta);
     }
+    if (data.containsKey('plant_mode_id')) {
+      context.handle(
+          _plantModeIdMeta,
+          plantModeId.isAcceptableOrUnknown(
+              data['plant_mode_id']!, _plantModeIdMeta));
+    } else if (isInserting) {
+      context.missing(_plantModeIdMeta);
+    }
     return context;
   }
 
@@ -1731,6 +1939,8 @@ class $GardenSectionsTable extends GardenSections
           .read(DriftSqlType.string, data['${effectivePrefix}tree_sub_type'])!,
       gardenId: attachedDatabase.typeMapping
           .read(DriftSqlType.string, data['${effectivePrefix}garden_id'])!,
+      plantModeId: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}plant_mode_id'])!,
     );
   }
 
@@ -1745,11 +1955,13 @@ class GardenSection extends DataClass implements Insertable<GardenSection> {
   final String treeType;
   final String treeSubType;
   final String gardenId;
+  final String plantModeId;
   const GardenSection(
       {required this.id,
       required this.treeType,
       required this.treeSubType,
-      required this.gardenId});
+      required this.gardenId,
+      required this.plantModeId});
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
@@ -1757,6 +1969,7 @@ class GardenSection extends DataClass implements Insertable<GardenSection> {
     map['tree_type'] = Variable<String>(treeType);
     map['tree_sub_type'] = Variable<String>(treeSubType);
     map['garden_id'] = Variable<String>(gardenId);
+    map['plant_mode_id'] = Variable<String>(plantModeId);
     return map;
   }
 
@@ -1766,6 +1979,7 @@ class GardenSection extends DataClass implements Insertable<GardenSection> {
       treeType: Value(treeType),
       treeSubType: Value(treeSubType),
       gardenId: Value(gardenId),
+      plantModeId: Value(plantModeId),
     );
   }
 
@@ -1777,6 +1991,7 @@ class GardenSection extends DataClass implements Insertable<GardenSection> {
       treeType: serializer.fromJson<String>(json['treeType']),
       treeSubType: serializer.fromJson<String>(json['treeSubType']),
       gardenId: serializer.fromJson<String>(json['gardenId']),
+      plantModeId: serializer.fromJson<String>(json['plantModeId']),
     );
   }
   @override
@@ -1787,6 +2002,7 @@ class GardenSection extends DataClass implements Insertable<GardenSection> {
       'treeType': serializer.toJson<String>(treeType),
       'treeSubType': serializer.toJson<String>(treeSubType),
       'gardenId': serializer.toJson<String>(gardenId),
+      'plantModeId': serializer.toJson<String>(plantModeId),
     };
   }
 
@@ -1794,12 +2010,14 @@ class GardenSection extends DataClass implements Insertable<GardenSection> {
           {String? id,
           String? treeType,
           String? treeSubType,
-          String? gardenId}) =>
+          String? gardenId,
+          String? plantModeId}) =>
       GardenSection(
         id: id ?? this.id,
         treeType: treeType ?? this.treeType,
         treeSubType: treeSubType ?? this.treeSubType,
         gardenId: gardenId ?? this.gardenId,
+        plantModeId: plantModeId ?? this.plantModeId,
       );
   GardenSection copyWithCompanion(GardenSectionsCompanion data) {
     return GardenSection(
@@ -1808,6 +2026,8 @@ class GardenSection extends DataClass implements Insertable<GardenSection> {
       treeSubType:
           data.treeSubType.present ? data.treeSubType.value : this.treeSubType,
       gardenId: data.gardenId.present ? data.gardenId.value : this.gardenId,
+      plantModeId:
+          data.plantModeId.present ? data.plantModeId.value : this.plantModeId,
     );
   }
 
@@ -1817,13 +2037,15 @@ class GardenSection extends DataClass implements Insertable<GardenSection> {
           ..write('id: $id, ')
           ..write('treeType: $treeType, ')
           ..write('treeSubType: $treeSubType, ')
-          ..write('gardenId: $gardenId')
+          ..write('gardenId: $gardenId, ')
+          ..write('plantModeId: $plantModeId')
           ..write(')'))
         .toString();
   }
 
   @override
-  int get hashCode => Object.hash(id, treeType, treeSubType, gardenId);
+  int get hashCode =>
+      Object.hash(id, treeType, treeSubType, gardenId, plantModeId);
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
@@ -1831,7 +2053,8 @@ class GardenSection extends DataClass implements Insertable<GardenSection> {
           other.id == this.id &&
           other.treeType == this.treeType &&
           other.treeSubType == this.treeSubType &&
-          other.gardenId == this.gardenId);
+          other.gardenId == this.gardenId &&
+          other.plantModeId == this.plantModeId);
 }
 
 class GardenSectionsCompanion extends UpdateCompanion<GardenSection> {
@@ -1839,12 +2062,14 @@ class GardenSectionsCompanion extends UpdateCompanion<GardenSection> {
   final Value<String> treeType;
   final Value<String> treeSubType;
   final Value<String> gardenId;
+  final Value<String> plantModeId;
   final Value<int> rowid;
   const GardenSectionsCompanion({
     this.id = const Value.absent(),
     this.treeType = const Value.absent(),
     this.treeSubType = const Value.absent(),
     this.gardenId = const Value.absent(),
+    this.plantModeId = const Value.absent(),
     this.rowid = const Value.absent(),
   });
   GardenSectionsCompanion.insert({
@@ -1852,16 +2077,19 @@ class GardenSectionsCompanion extends UpdateCompanion<GardenSection> {
     required String treeType,
     required String treeSubType,
     required String gardenId,
+    required String plantModeId,
     this.rowid = const Value.absent(),
   })  : id = Value(id),
         treeType = Value(treeType),
         treeSubType = Value(treeSubType),
-        gardenId = Value(gardenId);
+        gardenId = Value(gardenId),
+        plantModeId = Value(plantModeId);
   static Insertable<GardenSection> custom({
     Expression<String>? id,
     Expression<String>? treeType,
     Expression<String>? treeSubType,
     Expression<String>? gardenId,
+    Expression<String>? plantModeId,
     Expression<int>? rowid,
   }) {
     return RawValuesInsertable({
@@ -1869,6 +2097,7 @@ class GardenSectionsCompanion extends UpdateCompanion<GardenSection> {
       if (treeType != null) 'tree_type': treeType,
       if (treeSubType != null) 'tree_sub_type': treeSubType,
       if (gardenId != null) 'garden_id': gardenId,
+      if (plantModeId != null) 'plant_mode_id': plantModeId,
       if (rowid != null) 'rowid': rowid,
     });
   }
@@ -1878,12 +2107,14 @@ class GardenSectionsCompanion extends UpdateCompanion<GardenSection> {
       Value<String>? treeType,
       Value<String>? treeSubType,
       Value<String>? gardenId,
+      Value<String>? plantModeId,
       Value<int>? rowid}) {
     return GardenSectionsCompanion(
       id: id ?? this.id,
       treeType: treeType ?? this.treeType,
       treeSubType: treeSubType ?? this.treeSubType,
       gardenId: gardenId ?? this.gardenId,
+      plantModeId: plantModeId ?? this.plantModeId,
       rowid: rowid ?? this.rowid,
     );
   }
@@ -1903,6 +2134,9 @@ class GardenSectionsCompanion extends UpdateCompanion<GardenSection> {
     if (gardenId.present) {
       map['garden_id'] = Variable<String>(gardenId.value);
     }
+    if (plantModeId.present) {
+      map['plant_mode_id'] = Variable<String>(plantModeId.value);
+    }
     if (rowid.present) {
       map['rowid'] = Variable<int>(rowid.value);
     }
@@ -1916,6 +2150,7 @@ class GardenSectionsCompanion extends UpdateCompanion<GardenSection> {
           ..write('treeType: $treeType, ')
           ..write('treeSubType: $treeSubType, ')
           ..write('gardenId: $gardenId, ')
+          ..write('plantModeId: $plantModeId, ')
           ..write('rowid: $rowid')
           ..write(')'))
         .toString();
@@ -2678,196 +2913,6 @@ class TreeHistoriesCompanion extends UpdateCompanion<TreeHistory> {
   }
 }
 
-class $PlantingModesTable extends PlantingModes
-    with TableInfo<$PlantingModesTable, PlantingMode> {
-  @override
-  final GeneratedDatabase attachedDatabase;
-  final String? _alias;
-  $PlantingModesTable(this.attachedDatabase, [this._alias]);
-  static const VerificationMeta _idMeta = const VerificationMeta('id');
-  @override
-  late final GeneratedColumn<String> id = GeneratedColumn<String>(
-      'id', aliasedName, false,
-      type: DriftSqlType.string, requiredDuringInsert: true);
-  static const VerificationMeta _nameMeta = const VerificationMeta('name');
-  @override
-  late final GeneratedColumn<String> name = GeneratedColumn<String>(
-      'name', aliasedName, false,
-      additionalChecks:
-          GeneratedColumn.checkTextLength(minTextLength: 1, maxTextLength: 50),
-      type: DriftSqlType.string,
-      requiredDuringInsert: true);
-  @override
-  List<GeneratedColumn> get $columns => [id, name];
-  @override
-  String get aliasedName => _alias ?? actualTableName;
-  @override
-  String get actualTableName => $name;
-  static const String $name = 'planting_modes';
-  @override
-  VerificationContext validateIntegrity(Insertable<PlantingMode> instance,
-      {bool isInserting = false}) {
-    final context = VerificationContext();
-    final data = instance.toColumns(true);
-    if (data.containsKey('id')) {
-      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
-    } else if (isInserting) {
-      context.missing(_idMeta);
-    }
-    if (data.containsKey('name')) {
-      context.handle(
-          _nameMeta, name.isAcceptableOrUnknown(data['name']!, _nameMeta));
-    } else if (isInserting) {
-      context.missing(_nameMeta);
-    }
-    return context;
-  }
-
-  @override
-  Set<GeneratedColumn> get $primaryKey => {id};
-  @override
-  PlantingMode map(Map<String, dynamic> data, {String? tablePrefix}) {
-    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
-    return PlantingMode(
-      id: attachedDatabase.typeMapping
-          .read(DriftSqlType.string, data['${effectivePrefix}id'])!,
-      name: attachedDatabase.typeMapping
-          .read(DriftSqlType.string, data['${effectivePrefix}name'])!,
-    );
-  }
-
-  @override
-  $PlantingModesTable createAlias(String alias) {
-    return $PlantingModesTable(attachedDatabase, alias);
-  }
-}
-
-class PlantingMode extends DataClass implements Insertable<PlantingMode> {
-  final String id;
-  final String name;
-  const PlantingMode({required this.id, required this.name});
-  @override
-  Map<String, Expression> toColumns(bool nullToAbsent) {
-    final map = <String, Expression>{};
-    map['id'] = Variable<String>(id);
-    map['name'] = Variable<String>(name);
-    return map;
-  }
-
-  PlantingModesCompanion toCompanion(bool nullToAbsent) {
-    return PlantingModesCompanion(
-      id: Value(id),
-      name: Value(name),
-    );
-  }
-
-  factory PlantingMode.fromJson(Map<String, dynamic> json,
-      {ValueSerializer? serializer}) {
-    serializer ??= driftRuntimeOptions.defaultSerializer;
-    return PlantingMode(
-      id: serializer.fromJson<String>(json['id']),
-      name: serializer.fromJson<String>(json['name']),
-    );
-  }
-  @override
-  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
-    serializer ??= driftRuntimeOptions.defaultSerializer;
-    return <String, dynamic>{
-      'id': serializer.toJson<String>(id),
-      'name': serializer.toJson<String>(name),
-    };
-  }
-
-  PlantingMode copyWith({String? id, String? name}) => PlantingMode(
-        id: id ?? this.id,
-        name: name ?? this.name,
-      );
-  PlantingMode copyWithCompanion(PlantingModesCompanion data) {
-    return PlantingMode(
-      id: data.id.present ? data.id.value : this.id,
-      name: data.name.present ? data.name.value : this.name,
-    );
-  }
-
-  @override
-  String toString() {
-    return (StringBuffer('PlantingMode(')
-          ..write('id: $id, ')
-          ..write('name: $name')
-          ..write(')'))
-        .toString();
-  }
-
-  @override
-  int get hashCode => Object.hash(id, name);
-  @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      (other is PlantingMode && other.id == this.id && other.name == this.name);
-}
-
-class PlantingModesCompanion extends UpdateCompanion<PlantingMode> {
-  final Value<String> id;
-  final Value<String> name;
-  final Value<int> rowid;
-  const PlantingModesCompanion({
-    this.id = const Value.absent(),
-    this.name = const Value.absent(),
-    this.rowid = const Value.absent(),
-  });
-  PlantingModesCompanion.insert({
-    required String id,
-    required String name,
-    this.rowid = const Value.absent(),
-  })  : id = Value(id),
-        name = Value(name);
-  static Insertable<PlantingMode> custom({
-    Expression<String>? id,
-    Expression<String>? name,
-    Expression<int>? rowid,
-  }) {
-    return RawValuesInsertable({
-      if (id != null) 'id': id,
-      if (name != null) 'name': name,
-      if (rowid != null) 'rowid': rowid,
-    });
-  }
-
-  PlantingModesCompanion copyWith(
-      {Value<String>? id, Value<String>? name, Value<int>? rowid}) {
-    return PlantingModesCompanion(
-      id: id ?? this.id,
-      name: name ?? this.name,
-      rowid: rowid ?? this.rowid,
-    );
-  }
-
-  @override
-  Map<String, Expression> toColumns(bool nullToAbsent) {
-    final map = <String, Expression>{};
-    if (id.present) {
-      map['id'] = Variable<String>(id.value);
-    }
-    if (name.present) {
-      map['name'] = Variable<String>(name.value);
-    }
-    if (rowid.present) {
-      map['rowid'] = Variable<int>(rowid.value);
-    }
-    return map;
-  }
-
-  @override
-  String toString() {
-    return (StringBuffer('PlantingModesCompanion(')
-          ..write('id: $id, ')
-          ..write('name: $name, ')
-          ..write('rowid: $rowid')
-          ..write(')'))
-        .toString();
-  }
-}
-
 class $SectionLinesTable extends SectionLines
     with TableInfo<$SectionLinesTable, SectionLine> {
   @override
@@ -3538,12 +3583,12 @@ abstract class _$AppDatabase extends GeneratedDatabase {
   late final $SurfacesTable surfaces = $SurfacesTable(this);
   late final $UsersTable users = $UsersTable(this);
   late final $GardensTable gardens = $GardensTable(this);
+  late final $PlantingModesTable plantingModes = $PlantingModesTable(this);
   late final $GardenSectionsTable gardenSections = $GardenSectionsTable(this);
   late final $TreesTable trees = $TreesTable(this);
   late final $TreeHistoryOptionsTable treeHistoryOptions =
       $TreeHistoryOptionsTable(this);
   late final $TreeHistoriesTable treeHistories = $TreeHistoriesTable(this);
-  late final $PlantingModesTable plantingModes = $PlantingModesTable(this);
   late final $SectionLinesTable sectionLines = $SectionLinesTable(this);
   late final $CultureTypesTable cultureTypes = $CultureTypesTable(this);
   late final $EquipementsTable equipements = $EquipementsTable(this);
@@ -3559,11 +3604,11 @@ abstract class _$AppDatabase extends GeneratedDatabase {
         surfaces,
         users,
         gardens,
+        plantingModes,
         gardenSections,
         trees,
         treeHistoryOptions,
         treeHistories,
-        plantingModes,
         sectionLines,
         cultureTypes,
         equipements
@@ -5080,12 +5125,172 @@ typedef $$GardensTableProcessedTableManager = ProcessedTableManager<
         bool userId,
         bool gardenSectionsRefs,
         bool equipementsRefs})>;
+typedef $$PlantingModesTableCreateCompanionBuilder = PlantingModesCompanion
+    Function({
+  required String id,
+  required String name,
+  Value<int> rowid,
+});
+typedef $$PlantingModesTableUpdateCompanionBuilder = PlantingModesCompanion
+    Function({
+  Value<String> id,
+  Value<String> name,
+  Value<int> rowid,
+});
+
+final class $$PlantingModesTableReferences
+    extends BaseReferences<_$AppDatabase, $PlantingModesTable, PlantingMode> {
+  $$PlantingModesTableReferences(
+      super.$_db, super.$_table, super.$_typedResult);
+
+  static MultiTypedResultKey<$GardenSectionsTable, List<GardenSection>>
+      _gardenSectionsRefsTable(_$AppDatabase db) =>
+          MultiTypedResultKey.fromTable(db.gardenSections,
+              aliasName: $_aliasNameGenerator(
+                  db.plantingModes.id, db.gardenSections.plantModeId));
+
+  $$GardenSectionsTableProcessedTableManager get gardenSectionsRefs {
+    final manager = $$GardenSectionsTableTableManager($_db, $_db.gardenSections)
+        .filter((f) => f.plantModeId.id($_item.id));
+
+    final cache = $_typedResult.readTableOrNull(_gardenSectionsRefsTable($_db));
+    return ProcessedTableManager(
+        manager.$state.copyWith(prefetchedData: cache));
+  }
+}
+
+class $$PlantingModesTableFilterComposer
+    extends FilterComposer<_$AppDatabase, $PlantingModesTable> {
+  $$PlantingModesTableFilterComposer(super.$state);
+  ColumnFilters<String> get id => $state.composableBuilder(
+      column: $state.table.id,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<String> get name => $state.composableBuilder(
+      column: $state.table.name,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ComposableFilter gardenSectionsRefs(
+      ComposableFilter Function($$GardenSectionsTableFilterComposer f) f) {
+    final $$GardenSectionsTableFilterComposer composer = $state.composerBuilder(
+        composer: this,
+        getCurrentColumn: (t) => t.id,
+        referencedTable: $state.db.gardenSections,
+        getReferencedColumn: (t) => t.plantModeId,
+        builder: (joinBuilder, parentComposers) =>
+            $$GardenSectionsTableFilterComposer(ComposerState($state.db,
+                $state.db.gardenSections, joinBuilder, parentComposers)));
+    return f(composer);
+  }
+}
+
+class $$PlantingModesTableOrderingComposer
+    extends OrderingComposer<_$AppDatabase, $PlantingModesTable> {
+  $$PlantingModesTableOrderingComposer(super.$state);
+  ColumnOrderings<String> get id => $state.composableBuilder(
+      column: $state.table.id,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<String> get name => $state.composableBuilder(
+      column: $state.table.name,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+}
+
+class $$PlantingModesTableTableManager extends RootTableManager<
+    _$AppDatabase,
+    $PlantingModesTable,
+    PlantingMode,
+    $$PlantingModesTableFilterComposer,
+    $$PlantingModesTableOrderingComposer,
+    $$PlantingModesTableCreateCompanionBuilder,
+    $$PlantingModesTableUpdateCompanionBuilder,
+    (PlantingMode, $$PlantingModesTableReferences),
+    PlantingMode,
+    PrefetchHooks Function({bool gardenSectionsRefs})> {
+  $$PlantingModesTableTableManager(_$AppDatabase db, $PlantingModesTable table)
+      : super(TableManagerState(
+          db: db,
+          table: table,
+          filteringComposer:
+              $$PlantingModesTableFilterComposer(ComposerState(db, table)),
+          orderingComposer:
+              $$PlantingModesTableOrderingComposer(ComposerState(db, table)),
+          updateCompanionCallback: ({
+            Value<String> id = const Value.absent(),
+            Value<String> name = const Value.absent(),
+            Value<int> rowid = const Value.absent(),
+          }) =>
+              PlantingModesCompanion(
+            id: id,
+            name: name,
+            rowid: rowid,
+          ),
+          createCompanionCallback: ({
+            required String id,
+            required String name,
+            Value<int> rowid = const Value.absent(),
+          }) =>
+              PlantingModesCompanion.insert(
+            id: id,
+            name: name,
+            rowid: rowid,
+          ),
+          withReferenceMapper: (p0) => p0
+              .map((e) => (
+                    e.readTable(table),
+                    $$PlantingModesTableReferences(db, table, e)
+                  ))
+              .toList(),
+          prefetchHooksCallback: ({gardenSectionsRefs = false}) {
+            return PrefetchHooks(
+              db: db,
+              explicitlyWatchedTables: [
+                if (gardenSectionsRefs) db.gardenSections
+              ],
+              addJoins: null,
+              getPrefetchedDataCallback: (items) async {
+                return [
+                  if (gardenSectionsRefs)
+                    await $_getPrefetchedData(
+                        currentTable: table,
+                        referencedTable: $$PlantingModesTableReferences
+                            ._gardenSectionsRefsTable(db),
+                        managerFromTypedResult: (p0) =>
+                            $$PlantingModesTableReferences(db, table, p0)
+                                .gardenSectionsRefs,
+                        referencedItemsForCurrentItem:
+                            (item, referencedItems) => referencedItems
+                                .where((e) => e.plantModeId == item.id),
+                        typedResults: items)
+                ];
+              },
+            );
+          },
+        ));
+}
+
+typedef $$PlantingModesTableProcessedTableManager = ProcessedTableManager<
+    _$AppDatabase,
+    $PlantingModesTable,
+    PlantingMode,
+    $$PlantingModesTableFilterComposer,
+    $$PlantingModesTableOrderingComposer,
+    $$PlantingModesTableCreateCompanionBuilder,
+    $$PlantingModesTableUpdateCompanionBuilder,
+    (PlantingMode, $$PlantingModesTableReferences),
+    PlantingMode,
+    PrefetchHooks Function({bool gardenSectionsRefs})>;
 typedef $$GardenSectionsTableCreateCompanionBuilder = GardenSectionsCompanion
     Function({
   required String id,
   required String treeType,
   required String treeSubType,
   required String gardenId,
+  required String plantModeId,
   Value<int> rowid,
 });
 typedef $$GardenSectionsTableUpdateCompanionBuilder = GardenSectionsCompanion
@@ -5094,6 +5299,7 @@ typedef $$GardenSectionsTableUpdateCompanionBuilder = GardenSectionsCompanion
   Value<String> treeType,
   Value<String> treeSubType,
   Value<String> gardenId,
+  Value<String> plantModeId,
   Value<int> rowid,
 });
 
@@ -5139,6 +5345,20 @@ final class $$GardenSectionsTableReferences
     final manager = $$GardensTableTableManager($_db, $_db.gardens)
         .filter((f) => f.id($_item.gardenId!));
     final item = $_typedResult.readTableOrNull(_gardenIdTable($_db));
+    if (item == null) return manager;
+    return ProcessedTableManager(
+        manager.$state.copyWith(prefetchedData: [item]));
+  }
+
+  static $PlantingModesTable _plantModeIdTable(_$AppDatabase db) =>
+      db.plantingModes.createAlias($_aliasNameGenerator(
+          db.gardenSections.plantModeId, db.plantingModes.id));
+
+  $$PlantingModesTableProcessedTableManager? get plantModeId {
+    if ($_item.plantModeId == null) return null;
+    final manager = $$PlantingModesTableTableManager($_db, $_db.plantingModes)
+        .filter((f) => f.id($_item.plantModeId!));
+    final item = $_typedResult.readTableOrNull(_plantModeIdTable($_db));
     if (item == null) return manager;
     return ProcessedTableManager(
         manager.$state.copyWith(prefetchedData: [item]));
@@ -5219,6 +5439,18 @@ class $$GardenSectionsTableFilterComposer
     return composer;
   }
 
+  $$PlantingModesTableFilterComposer get plantModeId {
+    final $$PlantingModesTableFilterComposer composer = $state.composerBuilder(
+        composer: this,
+        getCurrentColumn: (t) => t.plantModeId,
+        referencedTable: $state.db.plantingModes,
+        getReferencedColumn: (t) => t.id,
+        builder: (joinBuilder, parentComposers) =>
+            $$PlantingModesTableFilterComposer(ComposerState($state.db,
+                $state.db.plantingModes, joinBuilder, parentComposers)));
+    return composer;
+  }
+
   ComposableFilter treesRefs(
       ComposableFilter Function($$TreesTableFilterComposer f) f) {
     final $$TreesTableFilterComposer composer = $state.composerBuilder(
@@ -5289,6 +5521,19 @@ class $$GardenSectionsTableOrderingComposer
                 $state.db, $state.db.gardens, joinBuilder, parentComposers)));
     return composer;
   }
+
+  $$PlantingModesTableOrderingComposer get plantModeId {
+    final $$PlantingModesTableOrderingComposer composer =
+        $state.composerBuilder(
+            composer: this,
+            getCurrentColumn: (t) => t.plantModeId,
+            referencedTable: $state.db.plantingModes,
+            getReferencedColumn: (t) => t.id,
+            builder: (joinBuilder, parentComposers) =>
+                $$PlantingModesTableOrderingComposer(ComposerState($state.db,
+                    $state.db.plantingModes, joinBuilder, parentComposers)));
+    return composer;
+  }
 }
 
 class $$GardenSectionsTableTableManager extends RootTableManager<
@@ -5305,6 +5550,7 @@ class $$GardenSectionsTableTableManager extends RootTableManager<
         {bool treeType,
         bool treeSubType,
         bool gardenId,
+        bool plantModeId,
         bool treesRefs,
         bool sectionLinesRefs})> {
   $$GardenSectionsTableTableManager(
@@ -5321,6 +5567,7 @@ class $$GardenSectionsTableTableManager extends RootTableManager<
             Value<String> treeType = const Value.absent(),
             Value<String> treeSubType = const Value.absent(),
             Value<String> gardenId = const Value.absent(),
+            Value<String> plantModeId = const Value.absent(),
             Value<int> rowid = const Value.absent(),
           }) =>
               GardenSectionsCompanion(
@@ -5328,6 +5575,7 @@ class $$GardenSectionsTableTableManager extends RootTableManager<
             treeType: treeType,
             treeSubType: treeSubType,
             gardenId: gardenId,
+            plantModeId: plantModeId,
             rowid: rowid,
           ),
           createCompanionCallback: ({
@@ -5335,6 +5583,7 @@ class $$GardenSectionsTableTableManager extends RootTableManager<
             required String treeType,
             required String treeSubType,
             required String gardenId,
+            required String plantModeId,
             Value<int> rowid = const Value.absent(),
           }) =>
               GardenSectionsCompanion.insert(
@@ -5342,6 +5591,7 @@ class $$GardenSectionsTableTableManager extends RootTableManager<
             treeType: treeType,
             treeSubType: treeSubType,
             gardenId: gardenId,
+            plantModeId: plantModeId,
             rowid: rowid,
           ),
           withReferenceMapper: (p0) => p0
@@ -5354,6 +5604,7 @@ class $$GardenSectionsTableTableManager extends RootTableManager<
               {treeType = false,
               treeSubType = false,
               gardenId = false,
+              plantModeId = false,
               treesRefs = false,
               sectionLinesRefs = false}) {
             return PrefetchHooks(
@@ -5403,6 +5654,17 @@ class $$GardenSectionsTableTableManager extends RootTableManager<
                         $$GardenSectionsTableReferences._gardenIdTable(db),
                     referencedColumn:
                         $$GardenSectionsTableReferences._gardenIdTable(db).id,
+                  ) as T;
+                }
+                if (plantModeId) {
+                  state = state.withJoin(
+                    currentTable: table,
+                    currentColumn: table.plantModeId,
+                    referencedTable:
+                        $$GardenSectionsTableReferences._plantModeIdTable(db),
+                    referencedColumn: $$GardenSectionsTableReferences
+                        ._plantModeIdTable(db)
+                        .id,
                   ) as T;
                 }
 
@@ -5455,6 +5717,7 @@ typedef $$GardenSectionsTableProcessedTableManager = ProcessedTableManager<
         {bool treeType,
         bool treeSubType,
         bool gardenId,
+        bool plantModeId,
         bool treesRefs,
         bool sectionLinesRefs})>;
 typedef $$TreesTableCreateCompanionBuilder = TreesCompanion Function({
@@ -6184,110 +6447,6 @@ typedef $$TreeHistoriesTableProcessedTableManager = ProcessedTableManager<
     (TreeHistory, $$TreeHistoriesTableReferences),
     TreeHistory,
     PrefetchHooks Function({bool treeId, bool treeHistoryOptionId})>;
-typedef $$PlantingModesTableCreateCompanionBuilder = PlantingModesCompanion
-    Function({
-  required String id,
-  required String name,
-  Value<int> rowid,
-});
-typedef $$PlantingModesTableUpdateCompanionBuilder = PlantingModesCompanion
-    Function({
-  Value<String> id,
-  Value<String> name,
-  Value<int> rowid,
-});
-
-class $$PlantingModesTableFilterComposer
-    extends FilterComposer<_$AppDatabase, $PlantingModesTable> {
-  $$PlantingModesTableFilterComposer(super.$state);
-  ColumnFilters<String> get id => $state.composableBuilder(
-      column: $state.table.id,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
-
-  ColumnFilters<String> get name => $state.composableBuilder(
-      column: $state.table.name,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
-}
-
-class $$PlantingModesTableOrderingComposer
-    extends OrderingComposer<_$AppDatabase, $PlantingModesTable> {
-  $$PlantingModesTableOrderingComposer(super.$state);
-  ColumnOrderings<String> get id => $state.composableBuilder(
-      column: $state.table.id,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
-
-  ColumnOrderings<String> get name => $state.composableBuilder(
-      column: $state.table.name,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
-}
-
-class $$PlantingModesTableTableManager extends RootTableManager<
-    _$AppDatabase,
-    $PlantingModesTable,
-    PlantingMode,
-    $$PlantingModesTableFilterComposer,
-    $$PlantingModesTableOrderingComposer,
-    $$PlantingModesTableCreateCompanionBuilder,
-    $$PlantingModesTableUpdateCompanionBuilder,
-    (
-      PlantingMode,
-      BaseReferences<_$AppDatabase, $PlantingModesTable, PlantingMode>
-    ),
-    PlantingMode,
-    PrefetchHooks Function()> {
-  $$PlantingModesTableTableManager(_$AppDatabase db, $PlantingModesTable table)
-      : super(TableManagerState(
-          db: db,
-          table: table,
-          filteringComposer:
-              $$PlantingModesTableFilterComposer(ComposerState(db, table)),
-          orderingComposer:
-              $$PlantingModesTableOrderingComposer(ComposerState(db, table)),
-          updateCompanionCallback: ({
-            Value<String> id = const Value.absent(),
-            Value<String> name = const Value.absent(),
-            Value<int> rowid = const Value.absent(),
-          }) =>
-              PlantingModesCompanion(
-            id: id,
-            name: name,
-            rowid: rowid,
-          ),
-          createCompanionCallback: ({
-            required String id,
-            required String name,
-            Value<int> rowid = const Value.absent(),
-          }) =>
-              PlantingModesCompanion.insert(
-            id: id,
-            name: name,
-            rowid: rowid,
-          ),
-          withReferenceMapper: (p0) => p0
-              .map((e) => (e.readTable(table), BaseReferences(db, table, e)))
-              .toList(),
-          prefetchHooksCallback: null,
-        ));
-}
-
-typedef $$PlantingModesTableProcessedTableManager = ProcessedTableManager<
-    _$AppDatabase,
-    $PlantingModesTable,
-    PlantingMode,
-    $$PlantingModesTableFilterComposer,
-    $$PlantingModesTableOrderingComposer,
-    $$PlantingModesTableCreateCompanionBuilder,
-    $$PlantingModesTableUpdateCompanionBuilder,
-    (
-      PlantingMode,
-      BaseReferences<_$AppDatabase, $PlantingModesTable, PlantingMode>
-    ),
-    PlantingMode,
-    PrefetchHooks Function()>;
 typedef $$SectionLinesTableCreateCompanionBuilder = SectionLinesCompanion
     Function({
   required String id,
@@ -6778,6 +6937,8 @@ class $AppDatabaseManager {
       $$UsersTableTableManager(_db, _db.users);
   $$GardensTableTableManager get gardens =>
       $$GardensTableTableManager(_db, _db.gardens);
+  $$PlantingModesTableTableManager get plantingModes =>
+      $$PlantingModesTableTableManager(_db, _db.plantingModes);
   $$GardenSectionsTableTableManager get gardenSections =>
       $$GardenSectionsTableTableManager(_db, _db.gardenSections);
   $$TreesTableTableManager get trees =>
@@ -6786,8 +6947,6 @@ class $AppDatabaseManager {
       $$TreeHistoryOptionsTableTableManager(_db, _db.treeHistoryOptions);
   $$TreeHistoriesTableTableManager get treeHistories =>
       $$TreeHistoriesTableTableManager(_db, _db.treeHistories);
-  $$PlantingModesTableTableManager get plantingModes =>
-      $$PlantingModesTableTableManager(_db, _db.plantingModes);
   $$SectionLinesTableTableManager get sectionLines =>
       $$SectionLinesTableTableManager(_db, _db.sectionLines);
   $$CultureTypesTableTableManager get cultureTypes =>

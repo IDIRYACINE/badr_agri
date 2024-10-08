@@ -1,3 +1,4 @@
+import 'package:badr_agri/domain/planting_mode.dart';
 import 'package:badr_agri/domain/tree_type.dart';
 
 class GardenSection {
@@ -5,9 +6,11 @@ class GardenSection {
   final List<SectionLine> lines;
   final TreeType treeType;
   final TreeSubType treeSubType;
+  final PlantingMode plantingMode;
 
   GardenSection(
       {required this.id,
+      required this.plantingMode, 
       required this.lines,
       required this.treeType,
       required this.treeSubType});

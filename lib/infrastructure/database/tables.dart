@@ -4,7 +4,8 @@ class Trees extends Table {
   TextColumn get id => text()(); // Primary key
   IntColumn get age => integer()();
   TextColumn get type => text().references(TreeTypes, #id)(); // Foreign key
-  TextColumn get sectionLineId => text().references(GardenSections, #id)(); // Foreign key
+  TextColumn get sectionLineId =>
+      text().references(GardenSections, #id)(); // Foreign key
   TextColumn get subType =>
       text().references(TreeSubTypes, #id)(); // Foreign key
 
@@ -82,6 +83,8 @@ class GardenSections extends Table {
   TextColumn get treeSubType =>
       text().references(TreeSubTypes, #id)(); // Foreign key
   TextColumn get gardenId => text().references(Gardens, #id)(); // Foreign key
+  TextColumn get plantModeId =>
+      text().references(PlantingModes, #id)(); // Foreign key
 
   @override
   Set<Column> get primaryKey => {id};

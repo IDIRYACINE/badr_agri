@@ -5,6 +5,7 @@ import 'package:badr_agri/domain/location.dart' as gps_location;
 import 'package:badr_agri/domain/tree_type.dart' as tree_domain;
 import 'package:badr_agri/domain/tree_history.dart' as tree_history;
 import 'package:badr_agri/domain/surface.dart' as surface_domain;
+import 'package:badr_agri/domain/planting_mode.dart' as planting_mode;
 
 import 'package:badr_agri/infrastructure/database/database.dart';
 
@@ -51,15 +52,14 @@ class DatabaseRepository {
         // Load the history option name
         final historyOptionQuery = await (db.select(db.treeHistoryOptions)
               ..where((option) =>
-                  option.id.equals(historyRecord.treeHistoryOptionId)
-                  ))
+                  option.id.equals(historyRecord.treeHistoryOptionId)))
             .getSingle();
 
         return tree_history.TreeHistory(
           id: historyRecord.id,
-          option: tree_history.TreeHistoryOption(id: historyOptionQuery.id, name: historyOptionQuery.name),
+          option: tree_history.TreeHistoryOption(
+              id: historyOptionQuery.id, name: historyOptionQuery.name),
         );
-
       }).toList();
 
       // Create and return the Tree object with the loaded dependencies
@@ -106,12 +106,18 @@ class DatabaseRepository {
         .map((line) => garden_section.SectionLine(id: line.id, trees: []))
         .toList();
 
+    final plantingMode = await (db.select(db.plantingModes)
+          ..where((option) => option.id.equals(section.plantModeId)))
+        .getSingle();
+
     // Create and return the GardenSection object
     return garden_section.GardenSection(
       id: section.id,
       lines: lines,
       treeType: treeType!,
       treeSubType: treeSubType!,
+      plantingMode: planting_mode.PlantingMode(
+          id: plantingMode.id, name: plantingMode.name),
     );
   }
 
@@ -120,7 +126,7 @@ class DatabaseRepository {
     final dbSections = await (db.select(db.gardenSections)
           ..where((t) => t.gardenId.equals(garden.id)))
         .get();
-  
+
     final coordinates = await (db.select(db.gpsCoordinates)
           ..where((t) => t.id.equals(garden.coordinatesId)))
         .getSingle();
@@ -132,7 +138,7 @@ class DatabaseRepository {
     final equipements = await (db.select(db.equipements)
           ..where((t) => t.gardenId.equals(garden.id)))
         .get();
-     
+
     final sections = await Future.wait(dbSections.map((section) async {
       return await gardenSectionDbToGardenSection(section);
     }).toList());

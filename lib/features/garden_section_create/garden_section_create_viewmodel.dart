@@ -44,20 +44,28 @@ class GardenSectionCreateViewModel extends BaseViewModel {
     final navigationService = locator<NavigationService>();
     final databaseService = locator<DatabaseService>();
 
-    List<Tree> treesLine = List.filled(
-        treeCount ?? 4,
-        Tree(
+    final targetTreeCount = treeCount ?? 4;
+
+    final targetLinesCount = lines ?? 4;
+    final List<SectionLine> sectionLines = [];
+    for (int i = 0; i < targetLinesCount; i++) {
+      List<Tree> treesLine = [];
+      for (int i = 0; i < targetTreeCount; i++) {
+        treesLine.add(Tree(
             id: databaseService.uuid.v4(),
             age: treesAge ?? 10,
             type: treeType!,
             histroy: sharedTreeHistory,
             subType: treeSubType!));
+      }
 
-    List<SectionLine> sectionLines =
-        List.filled(lines ?? 4, SectionLine(id: databaseService.uuid.v4(), trees: treesLine));
+      sectionLines
+          .add(SectionLine(id: databaseService.uuid.v4(), trees: treesLine));
+    }
 
     final section = GardenSection(
         lines: sectionLines,
+        plantingMode: plantingMode!,
         treeType: treeType!,
         treeSubType: treeSubType!,
         id: databaseService.uuid.v4());
