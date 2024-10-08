@@ -7,9 +7,11 @@ class AppFormCheckbox<T> extends StackedView<FormCheckboxModel> {
   final T data;
   final String Function(T) readLabel;
   final void Function(T, bool) onChecked;
+  final bool initialChecked;
   const AppFormCheckbox(
       {super.key,
       required this.data,
+      required this.initialChecked,
       required this.readLabel,
       required this.onChecked});
 
@@ -39,5 +41,5 @@ class AppFormCheckbox<T> extends StackedView<FormCheckboxModel> {
   FormCheckboxModel viewModelBuilder(
     BuildContext context,
   ) =>
-      FormCheckboxModel();
+      FormCheckboxModel(isChecked:initialChecked);
 }

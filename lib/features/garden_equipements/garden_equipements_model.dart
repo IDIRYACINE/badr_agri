@@ -18,6 +18,7 @@ class GardenEquipementsModel extends BaseViewModel {
 
     dialogSerivce.showCustomDialog(
       variant: DialogType.createEquipement,
+      title: "Test"
     );
   }
 

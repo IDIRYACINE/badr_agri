@@ -1,5 +1,6 @@
 import 'package:badr_agri/domain/planting_mode.dart';
 import 'package:badr_agri/domain/tree_type.dart';
+import 'package:badr_agri/features/tree_medical_history/tree_medical_history_view.dart';
 import 'package:badr_agri/ui/widgets/common/form_field/form_field.dart';
 import 'package:badr_agri/ui/widgets/common/form_selector/form_selector.dart';
 import 'package:flutter/material.dart';
@@ -40,6 +41,10 @@ class GardenSectionCreateView
             AppFormField(label: "trees age ", onUpdate: viewModel.setTreeAges),
             AppFormField(
                 label: "number of lines ", onUpdate: viewModel.setLinesCount),
+            Expanded(
+                child: TreeMedicalHistoryView(
+              tree: viewModel.treeHistory,
+            )),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [

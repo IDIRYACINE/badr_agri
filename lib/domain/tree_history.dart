@@ -18,4 +18,8 @@ class TreeHistory {
   final String id;
   final TreeHistoryOption option;
   TreeHistory({required this.id, required this.option});
+
+  TreeHistory copy(String newId) {
+    return TreeHistory(id: newId, option: option);
+  }
 }

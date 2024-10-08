@@ -102,9 +102,10 @@ class DatabaseRepository {
     final sectionLinesQuery = await (db.select(db.sectionLines)
           ..where((s) => s.gardenSectionId.equals(section.id)))
         .get();
-    final lines = sectionLinesQuery
-        .map((line) => garden_section.SectionLine(id: line.id, trees: []))
-        .toList();
+
+    final lines = await Future.wait(sectionLinesQuery.map((line) async {
+      return gardenSectionLineDbToGardenSectionLine(line);
+    }).toList());
 
     final plantingMode = await (db.select(db.plantingModes)
           ..where((option) => option.id.equals(section.plantModeId)))
