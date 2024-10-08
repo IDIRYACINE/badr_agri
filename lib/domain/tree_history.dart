@@ -1,15 +1,21 @@
-class TreeHistory {
+class TreeHistoryOption {
   final String id;
   final String name;
 
-  TreeHistory({required this.id, required this.name});
+  TreeHistoryOption({required this.id, required this.name});
 
-  static List<TreeHistory> possibleHistory = [
-    TreeHistory(id: "cultural_practices", name: "Cultural Practices"),
-    TreeHistory(id: "fertalisers", name: "Fertalisation"),
-    TreeHistory(id: "phito_sanitaire", name: "Sanitizer Phito"),
-    TreeHistory(id: "sickness", name: "Sicknesses"),
-    TreeHistory(id: "ligration", name: "Ligration"),
-    TreeHistory(id: "production", name: "Production")
+  static List<TreeHistoryOption> possibleHistory = [
+    TreeHistoryOption(id: "cultural_practices", name: "Cultural Practices"),
+    TreeHistoryOption(id: "fertalisers", name: "Fertalisation"),
+    TreeHistoryOption(id: "phito_sanitaire", name: "Sanitizer Phito"),
+    TreeHistoryOption(id: "sickness", name: "Sicknesses"),
+    TreeHistoryOption(id: "ligration", name: "Ligration"),
+    TreeHistoryOption(id: "production", name: "Production")
   ];
+}
+
+class TreeHistory {
+  final String id;
+  final TreeHistoryOption option;
+  TreeHistory({required this.id, required this.option});
 }

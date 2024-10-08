@@ -18,9 +18,9 @@ class TreeMedicalHistoryView extends StackedView<TreeMedicalHistoryViewModel> {
     Widget? child,
   ) {
     return ListView.builder(
-        itemCount: TreeHistory.possibleHistory.length,
+        itemCount: TreeHistoryOption.possibleHistory.length,
         itemBuilder: (ctx, index) => AppFormCheckbox(
-            data: TreeHistory.possibleHistory[index],
+            data: TreeHistoryOption.possibleHistory[index],
             readLabel: (v) => v.name,
             onChecked: viewModel.takeHistoryNote));
   }
@@ -29,5 +29,5 @@ class TreeMedicalHistoryView extends StackedView<TreeMedicalHistoryViewModel> {
   TreeMedicalHistoryViewModel viewModelBuilder(
     BuildContext context,
   ) =>
-      TreeMedicalHistoryViewModel(histroy: tree.histroy);
+      TreeMedicalHistoryViewModel(histroy: tree.histroy, treeId: tree.id);
 }

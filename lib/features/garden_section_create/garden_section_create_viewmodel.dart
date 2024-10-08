@@ -3,6 +3,7 @@ import 'package:badr_agri/domain/garden_section.dart';
 import 'package:badr_agri/domain/planting_mode.dart';
 import 'package:badr_agri/domain/tree_history.dart';
 import 'package:badr_agri/domain/tree_type.dart';
+import 'package:badr_agri/infrastructure/database_service.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 
@@ -41,24 +42,25 @@ class GardenSectionCreateViewModel extends BaseViewModel {
 
   void createSection() {
     final navigationService = locator<NavigationService>();
+    final databaseService = locator<DatabaseService>();
 
     List<Tree> treesLine = List.filled(
         treeCount ?? 4,
         Tree(
-            id: "tree",
+            id: databaseService.uuid.v4(),
             age: treesAge ?? 10,
             type: treeType!,
             histroy: sharedTreeHistory,
             subType: treeSubType!));
 
     List<SectionLine> sectionLines =
-        List.filled(lines ?? 4, SectionLine(id: "line", trees: treesLine));
+        List.filled(lines ?? 4, SectionLine(id: databaseService.uuid.v4(), trees: treesLine));
 
     final section = GardenSection(
         lines: sectionLines,
         treeType: treeType!,
         treeSubType: treeSubType!,
-        id: "section 1");
+        id: databaseService.uuid.v4());
 
     navigationService.back(result: section);
   }

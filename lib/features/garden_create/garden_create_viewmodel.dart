@@ -4,6 +4,7 @@ import 'package:badr_agri/domain/equipements.dart';
 import 'package:badr_agri/domain/garden.dart';
 import 'package:badr_agri/domain/location.dart';
 import 'package:badr_agri/domain/surface.dart';
+import 'package:badr_agri/infrastructure/database_service.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 
@@ -43,12 +44,16 @@ class GardenCreateViewModel extends BaseViewModel {
 
   void createGarden() {
     final navigationService = locator<NavigationService>();
+    final databaseService = locator<DatabaseService>();
 
     final garden = Garden(
         name: name ?? "named",
-        id: "id",
-        coordinates: GpsCoordinates(latitude: 0, longitude: 0),
-        surface: Surface(amount: surface ?? 20, type: type ?? SurfaceType.km),
+        id: databaseService.uuid.v4(),
+        coordinates: GpsCoordinates(latitude: 0, longitude: 0, id: databaseService.uuid.v4()),
+        surface: Surface(
+            id: databaseService.uuid.v4(),
+            amount: surface ?? 20,
+            type: type ?? SurfaceType.km),
         equipements: equipements,
         sections: []);
 

@@ -34,5 +34,5 @@ class GardenSectionsView extends StackedView<GardenSectionsViewModel> {
   GardenSectionsViewModel viewModelBuilder(
     BuildContext context,
   ) =>
-      GardenSectionsViewModel(sections: garden.sections);
+      GardenSectionsViewModel(sections: garden.sections,id:garden.id);
 }

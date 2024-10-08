@@ -51,13 +51,15 @@ class DatabaseRepository {
         // Load the history option name
         final historyOptionQuery = await (db.select(db.treeHistoryOptions)
               ..where((option) =>
-                  option.id.equals(historyRecord.treeHistoryOptionId)))
-            .get();
+                  option.id.equals(historyRecord.treeHistoryOptionId)
+                  ))
+            .getSingle();
 
         return tree_history.TreeHistory(
           id: historyRecord.id,
-          name: historyOptionQuery.first.name,
+          option: tree_history.TreeHistoryOption(id: historyOptionQuery.id, name: historyOptionQuery.name),
         );
+
       }).toList();
 
       // Create and return the Tree object with the loaded dependencies
@@ -115,10 +117,10 @@ class DatabaseRepository {
 
   Future<garden_domain.Garden> gardenDbToGarden(Garden garden) async {
     // Load related data
-    final sections = await (db.select(db.gardenSections)
+    final dbSections = await (db.select(db.gardenSections)
           ..where((t) => t.gardenId.equals(garden.id)))
         .get();
-
+  
     final coordinates = await (db.select(db.gpsCoordinates)
           ..where((t) => t.id.equals(garden.coordinatesId)))
         .getSingle();
@@ -130,23 +132,26 @@ class DatabaseRepository {
     final equipements = await (db.select(db.equipements)
           ..where((t) => t.gardenId.equals(garden.id)))
         .get();
+     
+    final sections = await Future.wait(dbSections.map((section) async {
+      return await gardenSectionDbToGardenSection(section);
+    }).toList());
 
     // Transform data into domain model
     return garden_domain.Garden(
       name: garden.name,
-      sections: await Future.wait(sections.map((section) async {
-        return await gardenSectionDbToGardenSection(section);
-      }).toList()),
+      sections: sections,
       id: garden.id,
       coordinates: gps_location.GpsCoordinates(
         latitude: coordinates.latitude,
         longitude: coordinates.longitude,
+        id: coordinates.id,
       ),
       surface: surface_domain.Surface(
           amount: surface.amount,
-          type: surface_domain.SurfaceType.values.firstWhere((v) =>
-              v.name ==
-              surface.type)), // Assuming you want to store surface amount
+          type: surface_domain.SurfaceType.values
+              .firstWhere((v) => v.name == surface.type),
+          id: surface.id), // Assuming you want to store surface amount
       equipements: equipements.map((e) {
         return equipement_domain.Equipement(
           id: e.id,
@@ -156,16 +161,23 @@ class DatabaseRepository {
       }).toList(),
     );
   }
+
   Future<List<garden_domain.Garden>> loadGardens(String userId) async {
-  // Query to fetch gardens based on the userId
-  final gardens = await (db.select(db.gardens)..where((g) => g.userId.equals(userId))).get();
+    // Query to fetch gardens based on the userId
+    final gardens = await (db.select(db.gardens)
+          ..where((g) => g.userId.equals(userId)))
+        .get();
 
-  // Use Future.wait to process all gardens concurrently
-  final gardenList = await Future.wait(gardens.map((garden) async {
-    return await gardenDbToGarden(garden);
-  }).toList());
+    List<garden_domain.Garden> gardenList = [];
 
-  return gardenList;
-}
+    if (gardens.isNotEmpty) {
+      gardenList = await Future.wait(gardens.map((garden) async {
+        return await gardenDbToGarden(garden);
+      }).toList());
+    }
 
+    // Use Future.wait to process all gardens concurrently
+
+    return gardenList;
+  }
 }

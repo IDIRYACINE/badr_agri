@@ -13,6 +13,7 @@ class GardenScreenView extends StackedView<GardenScreenViewModel> {
     GardenScreenViewModel viewModel,
     Widget? child,
   ) {
+    viewModel.loadData();
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.surface,
       body: Container(

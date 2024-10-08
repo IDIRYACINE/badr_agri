@@ -10,7 +10,6 @@ import 'package:badr_agri/features/profile/profile_view.dart';
 import 'package:badr_agri/features/garden_screen/garden_screen_view.dart';
 import 'package:badr_agri/features/garden_create/garden_create_view.dart';
 import 'package:badr_agri/features/garden_sections/garden_sections_view.dart';
-import 'package:badr_agri/features/section_create/section_create_view.dart';
 import 'package:badr_agri/features/garden_section_lines/garden_section_lines_view.dart';
 import 'package:badr_agri/features/garden_section_detaills/garden_section_detaills_view.dart';
 import 'package:badr_agri/features/tree_qr_scan/tree_qr_scan_view.dart';
@@ -35,7 +34,6 @@ import 'package:badr_agri/features/tree_details/tree_details_view.dart';
     MaterialRoute(page: GardenScreenView),
     MaterialRoute(page: GardenCreateView),
     MaterialRoute(page: GardenSectionsView),
-    MaterialRoute(page: SectionCreateView),
     MaterialRoute(page: GardenSectionLinesView),
     MaterialRoute(page: GardenSectionDetaillsView),
     MaterialRoute(page: TreeQrScanView),

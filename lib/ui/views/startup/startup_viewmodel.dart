@@ -1,4 +1,6 @@
 import 'package:badr_agri/infrastructure/auth_service.dart';
+import 'package:badr_agri/infrastructure/database/database.dart';
+import 'package:badr_agri/infrastructure/database_service.dart';
 import 'package:stacked/stacked.dart';
 import 'package:badr_agri/app/app.locator.dart';
 import 'package:badr_agri/app/app.router.dart';
@@ -17,7 +19,21 @@ class StartupViewModel extends BaseViewModel {
 
     if (authService.isAuthenticated() == false) {
       _navigationService.replaceWithLoginView();
+      return;
     }
+
+    final databaseService = locator<DatabaseService>();
+    databaseService.userId = authService.userId();
+    final authUser =authService.user();
+    final db = databaseService.database;
+     final user = await db.managers.users
+          .filter((f) => f.id(authUser!.id))
+          .getSingleOrNull();
+      if (user == null) {
+        db.into(db.users).insert(UsersCompanion.insert(
+            id: authUser!.id,
+            fullname: authUser.email ?? authUser.id));
+      }
 
     _navigationService.replaceWithHomeView();
   }

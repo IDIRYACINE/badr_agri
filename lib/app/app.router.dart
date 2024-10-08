@@ -25,8 +25,6 @@ import 'package:badr_agri/features/garden_sections/garden_sections_view.dart'
 import 'package:badr_agri/features/login/login_view.dart' as _i4;
 import 'package:badr_agri/features/map_location/map_location_view.dart' as _i16;
 import 'package:badr_agri/features/profile/profile_view.dart' as _i6;
-import 'package:badr_agri/features/section_create/section_create_view.dart'
-    as _i10;
 import 'package:badr_agri/features/signup/signup_view.dart' as _i5;
 import 'package:badr_agri/features/tree_details/tree_details_view.dart' as _i18;
 import 'package:badr_agri/features/tree_medical_history/tree_medical_history_view.dart'
@@ -130,10 +128,6 @@ class StackedRouter extends _i1.RouterBase {
       page: _i9.GardenSectionsView,
     ),
     _i1.RouteDef(
-      Routes.sectionCreateView,
-      page: _i10.SectionCreateView,
-    ),
-    _i1.RouteDef(
       Routes.gardenSectionLinesView,
       page: _i11.GardenSectionLinesView,
     ),
@@ -215,12 +209,6 @@ class StackedRouter extends _i1.RouterBase {
       return _i19.MaterialPageRoute<dynamic>(
         builder: (context) =>
             _i9.GardenSectionsView(key: args.key, garden: args.garden),
-        settings: data,
-      );
-    },
-    _i10.SectionCreateView: (data) {
-      return _i19.MaterialPageRoute<dynamic>(
-        builder: (context) => const _i10.SectionCreateView(),
         settings: data,
       );
     },

@@ -41,8 +41,8 @@ class Garden {
     return Garden(
         id: "test",
         name: "name",
-        coordinates: GpsCoordinates(latitude: 0, longitude: 0),
-        surface: Surface(amount: 23, type: SurfaceType.h),
+        coordinates: GpsCoordinates(latitude: 0, longitude: 0, id: 'id'),
+        surface: Surface(amount: 23, type: SurfaceType.h, id: 'id'),
         equipements: [],
         sections: []);
   }
