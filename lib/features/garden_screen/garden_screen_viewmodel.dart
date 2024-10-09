@@ -46,6 +46,19 @@ class GardenScreenViewModel extends BaseViewModel {
           surfaceId: garden.surface.id,
           userId: databaseService.userId!));
 
+      for (int i = 0; i < garden.equipements.length; i++) {
+        final equipement = garden.equipements[i];
+
+        await db
+            .into(db.equipements)
+            .insert(db_domain.EquipementsCompanion.insert(
+              id: equipement.id,
+              name: equipement.name,
+              quantity: equipement.quantity,
+              gardenId: garden.id,
+            ));
+      }
+
       gardens.add(garden);
       rebuildUi();
     }

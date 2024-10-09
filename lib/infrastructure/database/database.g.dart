@@ -2172,6 +2172,11 @@ class $TreesTable extends Trees with TableInfo<$TreesTable, Tree> {
   late final GeneratedColumn<int> age = GeneratedColumn<int>(
       'age', aliasedName, false,
       type: DriftSqlType.int, requiredDuringInsert: true);
+  static const VerificationMeta _numberMeta = const VerificationMeta('number');
+  @override
+  late final GeneratedColumn<int> number = GeneratedColumn<int>(
+      'number', aliasedName, false,
+      type: DriftSqlType.int, requiredDuringInsert: true);
   static const VerificationMeta _typeMeta = const VerificationMeta('type');
   @override
   late final GeneratedColumn<String> type = GeneratedColumn<String>(
@@ -2199,7 +2204,8 @@ class $TreesTable extends Trees with TableInfo<$TreesTable, Tree> {
       defaultConstraints:
           GeneratedColumn.constraintIsAlways('REFERENCES tree_sub_types (id)'));
   @override
-  List<GeneratedColumn> get $columns => [id, age, type, sectionLineId, subType];
+  List<GeneratedColumn> get $columns =>
+      [id, age, number, type, sectionLineId, subType];
   @override
   String get aliasedName => _alias ?? actualTableName;
   @override
@@ -2220,6 +2226,12 @@ class $TreesTable extends Trees with TableInfo<$TreesTable, Tree> {
           _ageMeta, age.isAcceptableOrUnknown(data['age']!, _ageMeta));
     } else if (isInserting) {
       context.missing(_ageMeta);
+    }
+    if (data.containsKey('number')) {
+      context.handle(_numberMeta,
+          number.isAcceptableOrUnknown(data['number']!, _numberMeta));
+    } else if (isInserting) {
+      context.missing(_numberMeta);
     }
     if (data.containsKey('type')) {
       context.handle(
@@ -2254,6 +2266,8 @@ class $TreesTable extends Trees with TableInfo<$TreesTable, Tree> {
           .read(DriftSqlType.string, data['${effectivePrefix}id'])!,
       age: attachedDatabase.typeMapping
           .read(DriftSqlType.int, data['${effectivePrefix}age'])!,
+      number: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}number'])!,
       type: attachedDatabase.typeMapping
           .read(DriftSqlType.string, data['${effectivePrefix}type'])!,
       sectionLineId: attachedDatabase.typeMapping.read(
@@ -2272,12 +2286,14 @@ class $TreesTable extends Trees with TableInfo<$TreesTable, Tree> {
 class Tree extends DataClass implements Insertable<Tree> {
   final String id;
   final int age;
+  final int number;
   final String type;
   final String sectionLineId;
   final String subType;
   const Tree(
       {required this.id,
       required this.age,
+      required this.number,
       required this.type,
       required this.sectionLineId,
       required this.subType});
@@ -2286,6 +2302,7 @@ class Tree extends DataClass implements Insertable<Tree> {
     final map = <String, Expression>{};
     map['id'] = Variable<String>(id);
     map['age'] = Variable<int>(age);
+    map['number'] = Variable<int>(number);
     map['type'] = Variable<String>(type);
     map['section_line_id'] = Variable<String>(sectionLineId);
     map['sub_type'] = Variable<String>(subType);
@@ -2296,6 +2313,7 @@ class Tree extends DataClass implements Insertable<Tree> {
     return TreesCompanion(
       id: Value(id),
       age: Value(age),
+      number: Value(number),
       type: Value(type),
       sectionLineId: Value(sectionLineId),
       subType: Value(subType),
@@ -2308,6 +2326,7 @@ class Tree extends DataClass implements Insertable<Tree> {
     return Tree(
       id: serializer.fromJson<String>(json['id']),
       age: serializer.fromJson<int>(json['age']),
+      number: serializer.fromJson<int>(json['number']),
       type: serializer.fromJson<String>(json['type']),
       sectionLineId: serializer.fromJson<String>(json['sectionLineId']),
       subType: serializer.fromJson<String>(json['subType']),
@@ -2319,6 +2338,7 @@ class Tree extends DataClass implements Insertable<Tree> {
     return <String, dynamic>{
       'id': serializer.toJson<String>(id),
       'age': serializer.toJson<int>(age),
+      'number': serializer.toJson<int>(number),
       'type': serializer.toJson<String>(type),
       'sectionLineId': serializer.toJson<String>(sectionLineId),
       'subType': serializer.toJson<String>(subType),
@@ -2328,12 +2348,14 @@ class Tree extends DataClass implements Insertable<Tree> {
   Tree copyWith(
           {String? id,
           int? age,
+          int? number,
           String? type,
           String? sectionLineId,
           String? subType}) =>
       Tree(
         id: id ?? this.id,
         age: age ?? this.age,
+        number: number ?? this.number,
         type: type ?? this.type,
         sectionLineId: sectionLineId ?? this.sectionLineId,
         subType: subType ?? this.subType,
@@ -2342,6 +2364,7 @@ class Tree extends DataClass implements Insertable<Tree> {
     return Tree(
       id: data.id.present ? data.id.value : this.id,
       age: data.age.present ? data.age.value : this.age,
+      number: data.number.present ? data.number.value : this.number,
       type: data.type.present ? data.type.value : this.type,
       sectionLineId: data.sectionLineId.present
           ? data.sectionLineId.value
@@ -2355,6 +2378,7 @@ class Tree extends DataClass implements Insertable<Tree> {
     return (StringBuffer('Tree(')
           ..write('id: $id, ')
           ..write('age: $age, ')
+          ..write('number: $number, ')
           ..write('type: $type, ')
           ..write('sectionLineId: $sectionLineId, ')
           ..write('subType: $subType')
@@ -2363,13 +2387,15 @@ class Tree extends DataClass implements Insertable<Tree> {
   }
 
   @override
-  int get hashCode => Object.hash(id, age, type, sectionLineId, subType);
+  int get hashCode =>
+      Object.hash(id, age, number, type, sectionLineId, subType);
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
       (other is Tree &&
           other.id == this.id &&
           other.age == this.age &&
+          other.number == this.number &&
           other.type == this.type &&
           other.sectionLineId == this.sectionLineId &&
           other.subType == this.subType);
@@ -2378,6 +2404,7 @@ class Tree extends DataClass implements Insertable<Tree> {
 class TreesCompanion extends UpdateCompanion<Tree> {
   final Value<String> id;
   final Value<int> age;
+  final Value<int> number;
   final Value<String> type;
   final Value<String> sectionLineId;
   final Value<String> subType;
@@ -2385,6 +2412,7 @@ class TreesCompanion extends UpdateCompanion<Tree> {
   const TreesCompanion({
     this.id = const Value.absent(),
     this.age = const Value.absent(),
+    this.number = const Value.absent(),
     this.type = const Value.absent(),
     this.sectionLineId = const Value.absent(),
     this.subType = const Value.absent(),
@@ -2393,18 +2421,21 @@ class TreesCompanion extends UpdateCompanion<Tree> {
   TreesCompanion.insert({
     required String id,
     required int age,
+    required int number,
     required String type,
     required String sectionLineId,
     required String subType,
     this.rowid = const Value.absent(),
   })  : id = Value(id),
         age = Value(age),
+        number = Value(number),
         type = Value(type),
         sectionLineId = Value(sectionLineId),
         subType = Value(subType);
   static Insertable<Tree> custom({
     Expression<String>? id,
     Expression<int>? age,
+    Expression<int>? number,
     Expression<String>? type,
     Expression<String>? sectionLineId,
     Expression<String>? subType,
@@ -2413,6 +2444,7 @@ class TreesCompanion extends UpdateCompanion<Tree> {
     return RawValuesInsertable({
       if (id != null) 'id': id,
       if (age != null) 'age': age,
+      if (number != null) 'number': number,
       if (type != null) 'type': type,
       if (sectionLineId != null) 'section_line_id': sectionLineId,
       if (subType != null) 'sub_type': subType,
@@ -2423,6 +2455,7 @@ class TreesCompanion extends UpdateCompanion<Tree> {
   TreesCompanion copyWith(
       {Value<String>? id,
       Value<int>? age,
+      Value<int>? number,
       Value<String>? type,
       Value<String>? sectionLineId,
       Value<String>? subType,
@@ -2430,6 +2463,7 @@ class TreesCompanion extends UpdateCompanion<Tree> {
     return TreesCompanion(
       id: id ?? this.id,
       age: age ?? this.age,
+      number: number ?? this.number,
       type: type ?? this.type,
       sectionLineId: sectionLineId ?? this.sectionLineId,
       subType: subType ?? this.subType,
@@ -2445,6 +2479,9 @@ class TreesCompanion extends UpdateCompanion<Tree> {
     }
     if (age.present) {
       map['age'] = Variable<int>(age.value);
+    }
+    if (number.present) {
+      map['number'] = Variable<int>(number.value);
     }
     if (type.present) {
       map['type'] = Variable<String>(type.value);
@@ -2466,6 +2503,7 @@ class TreesCompanion extends UpdateCompanion<Tree> {
     return (StringBuffer('TreesCompanion(')
           ..write('id: $id, ')
           ..write('age: $age, ')
+          ..write('number: $number, ')
           ..write('type: $type, ')
           ..write('sectionLineId: $sectionLineId, ')
           ..write('subType: $subType, ')
@@ -5723,6 +5761,7 @@ typedef $$GardenSectionsTableProcessedTableManager = ProcessedTableManager<
 typedef $$TreesTableCreateCompanionBuilder = TreesCompanion Function({
   required String id,
   required int age,
+  required int number,
   required String type,
   required String sectionLineId,
   required String subType,
@@ -5731,6 +5770,7 @@ typedef $$TreesTableCreateCompanionBuilder = TreesCompanion Function({
 typedef $$TreesTableUpdateCompanionBuilder = TreesCompanion Function({
   Value<String> id,
   Value<int> age,
+  Value<int> number,
   Value<String> type,
   Value<String> sectionLineId,
   Value<String> subType,
@@ -5810,6 +5850,11 @@ class $$TreesTableFilterComposer
       builder: (column, joinBuilders) =>
           ColumnFilters(column, joinBuilders: joinBuilders));
 
+  ColumnFilters<int> get number => $state.composableBuilder(
+      column: $state.table.number,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+
   $$TreeTypesTableFilterComposer get type {
     final $$TreeTypesTableFilterComposer composer = $state.composerBuilder(
         composer: this,
@@ -5870,6 +5915,11 @@ class $$TreesTableOrderingComposer
 
   ColumnOrderings<int> get age => $state.composableBuilder(
       column: $state.table.age,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<int> get number => $state.composableBuilder(
+      column: $state.table.number,
       builder: (column, joinBuilders) =>
           ColumnOrderings(column, joinBuilders: joinBuilders));
 
@@ -5937,6 +5987,7 @@ class $$TreesTableTableManager extends RootTableManager<
           updateCompanionCallback: ({
             Value<String> id = const Value.absent(),
             Value<int> age = const Value.absent(),
+            Value<int> number = const Value.absent(),
             Value<String> type = const Value.absent(),
             Value<String> sectionLineId = const Value.absent(),
             Value<String> subType = const Value.absent(),
@@ -5945,6 +5996,7 @@ class $$TreesTableTableManager extends RootTableManager<
               TreesCompanion(
             id: id,
             age: age,
+            number: number,
             type: type,
             sectionLineId: sectionLineId,
             subType: subType,
@@ -5953,6 +6005,7 @@ class $$TreesTableTableManager extends RootTableManager<
           createCompanionCallback: ({
             required String id,
             required int age,
+            required int number,
             required String type,
             required String sectionLineId,
             required String subType,
@@ -5961,6 +6014,7 @@ class $$TreesTableTableManager extends RootTableManager<
               TreesCompanion.insert(
             id: id,
             age: age,
+            number: number,
             type: type,
             sectionLineId: sectionLineId,
             subType: subType,

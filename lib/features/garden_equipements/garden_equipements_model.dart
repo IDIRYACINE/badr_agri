@@ -13,22 +13,21 @@ class GardenEquipementsModel extends BaseViewModel {
     data.remove(equipement);
   }
 
-  void addEquipement() {
+  void addEquipement() async {
     final dialogSerivce = locator<DialogService>();
 
-    dialogSerivce.showCustomDialog(
+    final equipement = (await dialogSerivce.showCustomDialog(
       variant: DialogType.createEquipement,
-      title: "Test"
-    );
-  }
+    ))
+        ?.data;
 
-  onEquipementDialogResponse(DialogResponse res) {
-    final equipement = res.data as Equipement?;
-    if (equipement != null) {
+    if (equipement is Equipement) {
       data.add(equipement);
       rebuildUi();
     }
+  }
 
-    return equipement;
+  void delete(Equipement equipement) {
+    data.remove(equipement);
   }
 }

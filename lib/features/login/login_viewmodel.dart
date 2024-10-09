@@ -14,7 +14,7 @@ class LoginViewModel extends BaseViewModel {
       final navigationsService = locator<NavigationService>();
 
       final databaseService = locator<DatabaseService>();
-      
+
       final db = databaseService.database;
 
       final user = await db.managers.users

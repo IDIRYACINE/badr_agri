@@ -6,11 +6,14 @@ import 'package:stacked_services/stacked_services.dart';
 
 class GardenSectionCard extends StatelessWidget {
   final GardenSection gardenSection;
-  const GardenSectionCard({super.key, required this.gardenSection});
+  final int index;
+  const GardenSectionCard(
+      {super.key, required this.gardenSection, required this.index});
 
   void goToDetaills() {
     final nav = locator<NavigationService>();
-    nav.navigateToGardenSectionLinesView(gardenSection: gardenSection);
+    nav.navigateToGardenSectionLinesView(
+        gardenSection: gardenSection, sectionIndex: index);
   }
 
   @override
@@ -20,7 +23,7 @@ class GardenSectionCard extends StatelessWidget {
       child: Card(
         child: SafeArea(
           minimum: const EdgeInsets.all(10.0),
-          child: Text(gardenSection.id),
+          child: Text("Section $index"),
         ),
       ),
     );

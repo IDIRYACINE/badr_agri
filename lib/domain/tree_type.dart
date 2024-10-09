@@ -4,11 +4,13 @@ class Tree {
   final String id;
   final int age;
   final TreeType type;
+  final int number;
   final TreeSubType subType;
   final List<TreeHistory> histroy;
 
   Tree(
       {required this.id,
+      required this.number,
       required this.histroy,
       required this.age,
       required this.type,
@@ -31,7 +33,6 @@ class TreeType {
     TreeType(id: "POIRIER", name: "POIRIER"),
     TreeType(id: "PRUNIER", name: "PRUNIER"),
   ];
-
 }
 
 class TreeSubType {

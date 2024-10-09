@@ -29,8 +29,10 @@ class GardenEquipements extends StackedView<GardenEquipementsModel> {
         Expanded(
           child: ListView.builder(
             itemCount: viewModel.data.length,
-            itemBuilder: (ctx, index) =>
-                EquipementCard(equipement: viewModel.data[index]),
+            itemBuilder: (ctx, index) => EquipementCard(
+              equipement: viewModel.data[index],
+              onDismissed: viewModel.delete,
+            ),
           ),
         )
       ],

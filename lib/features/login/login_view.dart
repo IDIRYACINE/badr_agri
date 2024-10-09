@@ -21,7 +21,7 @@ class LoginView extends StackedView<LoginViewModel> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            const Text("TBD LOGO"),
+             Image.asset("assets/logo.png",width: 300,),
             SupaEmailAuth(
               redirectTo: kIsWeb ? null : 'io.mydomain.myapp://callback',
               onSignInComplete: viewModel.onLogin,

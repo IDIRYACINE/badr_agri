@@ -21,6 +21,7 @@ class GardenSectionCreateViewModel extends BaseViewModel {
     histroy: [],
     type: TreeType.types[0],
     subType: TreeSubType.types[0],
+    number: 0,
   );
 
   void setPlantingMode(PlantingMode? value) {
@@ -58,16 +59,14 @@ class GardenSectionCreateViewModel extends BaseViewModel {
     for (int i = 0; i < targetLinesCount; i++) {
       List<Tree> treesLine = [];
       for (int j = 0; j < targetTreeCount; j++) {
-
         List<TreeHistory> history = [];
 
         for (int c = 0; c < treeHistory.histroy.length; c++) {
-          history.add(
-            treeHistory.histroy[c].copy(databaseService.uuid.v4())
-          );
+          history.add(treeHistory.histroy[c].copy(databaseService.uuid.v4()));
         }
 
         treesLine.add(Tree(
+            number: j,
             id: databaseService.uuid.v4(),
             age: treesAge ?? 10,
             type: treeType!,

@@ -41,5 +41,5 @@ class AppFormCheckbox<T> extends StackedView<FormCheckboxModel> {
   FormCheckboxModel viewModelBuilder(
     BuildContext context,
   ) =>
-      FormCheckboxModel(isChecked:initialChecked);
+      FormCheckboxModel(isChecked: initialChecked);
 }

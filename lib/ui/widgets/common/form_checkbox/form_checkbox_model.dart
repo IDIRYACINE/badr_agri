@@ -1,7 +1,7 @@
 import 'package:stacked/stacked.dart';
 
 class FormCheckboxModel extends BaseViewModel {
-  bool isChecked ;
+  bool isChecked;
 
   FormCheckboxModel({required this.isChecked});
 

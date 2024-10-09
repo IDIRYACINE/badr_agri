@@ -24,16 +24,15 @@ class StartupViewModel extends BaseViewModel {
 
     final databaseService = locator<DatabaseService>();
     databaseService.userId = authService.userId();
-    final authUser =authService.user();
+    final authUser = authService.user();
     final db = databaseService.database;
-     final user = await db.managers.users
-          .filter((f) => f.id(authUser!.id))
-          .getSingleOrNull();
-      if (user == null) {
-        db.into(db.users).insert(UsersCompanion.insert(
-            id: authUser!.id,
-            fullname: authUser.email ?? authUser.id));
-      }
+    final user = await db.managers.users
+        .filter((f) => f.id(authUser!.id))
+        .getSingleOrNull();
+    if (user == null) {
+      db.into(db.users).insert(UsersCompanion.insert(
+          id: authUser!.id, fullname: authUser.email ?? authUser.id));
+    }
 
     _navigationService.replaceWithHomeView();
   }

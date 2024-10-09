@@ -10,7 +10,7 @@ class GardenSection {
 
   GardenSection(
       {required this.id,
-      required this.plantingMode, 
+      required this.plantingMode,
       required this.lines,
       required this.treeType,
       required this.treeSubType});

@@ -11,18 +11,15 @@ class TreeMedicalHistoryView extends StackedView<TreeMedicalHistoryViewModel> {
   const TreeMedicalHistoryView({required this.tree, Key? key})
       : super(key: key);
 
-
-      bool isChecked(TreeHistoryOption option){
-        bool isThere = false;
-        for(var treeHistory in tree.histroy){
-          if(option.id == treeHistory.option.id)
-            {
-              isThere = true;
-            }
-        }
-        return isThere;
-
+  bool isChecked(TreeHistoryOption option) {
+    bool isThere = false;
+    for (var treeHistory in tree.histroy) {
+      if (option.id == treeHistory.option.id) {
+        isThere = true;
       }
+    }
+    return isThere;
+  }
 
   @override
   Widget builder(

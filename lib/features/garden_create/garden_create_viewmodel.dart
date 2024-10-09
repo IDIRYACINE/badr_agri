@@ -49,7 +49,8 @@ class GardenCreateViewModel extends BaseViewModel {
     final garden = Garden(
         name: name ?? "named",
         id: databaseService.uuid.v4(),
-        coordinates: GpsCoordinates(latitude: 0, longitude: 0, id: databaseService.uuid.v4()),
+        coordinates: GpsCoordinates(
+            latitude: 0, longitude: 0, id: databaseService.uuid.v4()),
         surface: Surface(
             id: databaseService.uuid.v4(),
             amount: surface ?? 20,

@@ -84,7 +84,6 @@ MockAuthService getAndRegisterAuthService() {
   return service;
 }
 
-
 MockTreeService getAndRegisterTreeService() {
   _removeRegistrationIfExists<TreeService>();
   final service = MockTreeService();

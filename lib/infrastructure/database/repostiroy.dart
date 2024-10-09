@@ -64,6 +64,7 @@ class DatabaseRepository {
 
       // Create and return the Tree object with the loaded dependencies
       return tree_domain.Tree(
+        number: tree.number,
         id: tree.id,
         type: treeType!, // Assign the loaded TreeType
         age: tree.age,

@@ -1,5 +1,6 @@
 import 'package:badr_agri/domain/surface.dart';
 import 'package:badr_agri/features/garden_equipements/garden_equipements.dart';
+import 'package:badr_agri/ui/widgets/common/appbar.dart';
 import 'package:badr_agri/ui/widgets/common/form_field/form_field.dart';
 import 'package:badr_agri/ui/widgets/common/form_selector/form_selector.dart';
 import 'package:flutter/material.dart';
@@ -17,6 +18,7 @@ class GardenCreateView extends StackedView<GardenCreateViewModel> {
     Widget? child,
   ) {
     return Scaffold(
+      appBar: const AppbarDefault(),
       backgroundColor: Theme.of(context).colorScheme.surface,
       body: Container(
         padding: const EdgeInsets.all(25.0),

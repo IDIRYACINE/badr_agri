@@ -31,14 +31,14 @@ class AuthService {
   }
 
   bool isAuthenticated() {
-    return Supabase.instance.client.auth.currentUser != null ;
+    return Supabase.instance.client.auth.currentUser != null;
   }
 
-  String? userId(){
-    return Supabase.instance.client.auth.currentUser?.id ;
+  String? userId() {
+    return Supabase.instance.client.auth.currentUser?.id;
   }
 
-  User? user(){
+  User? user() {
     return Supabase.instance.client.auth.currentUser;
   }
 }

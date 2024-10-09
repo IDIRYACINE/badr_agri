@@ -213,7 +213,9 @@ class StackedRouter extends _i1.RouterBase {
       final args = data.getArgs<GardenSectionLinesViewArguments>(nullOk: false);
       return _i18.MaterialPageRoute<dynamic>(
         builder: (context) => _i10.GardenSectionLinesView(
-            key: args.key, gardenSection: args.gardenSection),
+            key: args.key,
+            gardenSection: args.gardenSection,
+            sectionIndex: args.sectionIndex),
         settings: data,
       );
     },
@@ -222,7 +224,10 @@ class StackedRouter extends _i1.RouterBase {
           data.getArgs<GardenSectionDetaillsViewArguments>(nullOk: false);
       return _i18.MaterialPageRoute<dynamic>(
         builder: (context) => _i11.GardenSectionDetaillsView(
-            key: args.key, sectionLine: args.sectionLine),
+            key: args.key,
+            sectionLine: args.sectionLine,
+            lineIndex: args.lineIndex,
+            sectionIndex: args.sectionIndex),
         settings: data,
       );
     },
@@ -306,26 +311,31 @@ class GardenSectionLinesViewArguments {
   const GardenSectionLinesViewArguments({
     this.key,
     required this.gardenSection,
+    required this.sectionIndex,
   });
 
   final _i18.Key? key;
 
   final _i20.GardenSection gardenSection;
 
+  final int sectionIndex;
+
   @override
   String toString() {
-    return '{"key": "$key", "gardenSection": "$gardenSection"}';
+    return '{"key": "$key", "gardenSection": "$gardenSection", "sectionIndex": "$sectionIndex"}';
   }
 
   @override
   bool operator ==(covariant GardenSectionLinesViewArguments other) {
     if (identical(this, other)) return true;
-    return other.key == key && other.gardenSection == gardenSection;
+    return other.key == key &&
+        other.gardenSection == gardenSection &&
+        other.sectionIndex == sectionIndex;
   }
 
   @override
   int get hashCode {
-    return key.hashCode ^ gardenSection.hashCode;
+    return key.hashCode ^ gardenSection.hashCode ^ sectionIndex.hashCode;
   }
 }
 
@@ -333,26 +343,38 @@ class GardenSectionDetaillsViewArguments {
   const GardenSectionDetaillsViewArguments({
     this.key,
     required this.sectionLine,
+    required this.lineIndex,
+    required this.sectionIndex,
   });
 
   final _i18.Key? key;
 
   final _i20.SectionLine sectionLine;
 
+  final int lineIndex;
+
+  final int sectionIndex;
+
   @override
   String toString() {
-    return '{"key": "$key", "sectionLine": "$sectionLine"}';
+    return '{"key": "$key", "sectionLine": "$sectionLine", "lineIndex": "$lineIndex", "sectionIndex": "$sectionIndex"}';
   }
 
   @override
   bool operator ==(covariant GardenSectionDetaillsViewArguments other) {
     if (identical(this, other)) return true;
-    return other.key == key && other.sectionLine == sectionLine;
+    return other.key == key &&
+        other.sectionLine == sectionLine &&
+        other.lineIndex == lineIndex &&
+        other.sectionIndex == sectionIndex;
   }
 
   @override
   int get hashCode {
-    return key.hashCode ^ sectionLine.hashCode;
+    return key.hashCode ^
+        sectionLine.hashCode ^
+        lineIndex.hashCode ^
+        sectionIndex.hashCode;
   }
 }
 
@@ -529,6 +551,7 @@ extension NavigatorStateExtension on _i22.NavigationService {
   Future<dynamic> navigateToGardenSectionLinesView({
     _i18.Key? key,
     required _i20.GardenSection gardenSection,
+    required int sectionIndex,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
@@ -537,7 +560,7 @@ extension NavigatorStateExtension on _i22.NavigationService {
   }) async {
     return navigateTo<dynamic>(Routes.gardenSectionLinesView,
         arguments: GardenSectionLinesViewArguments(
-            key: key, gardenSection: gardenSection),
+            key: key, gardenSection: gardenSection, sectionIndex: sectionIndex),
         id: routerId,
         preventDuplicates: preventDuplicates,
         parameters: parameters,
@@ -547,6 +570,8 @@ extension NavigatorStateExtension on _i22.NavigationService {
   Future<dynamic> navigateToGardenSectionDetaillsView({
     _i18.Key? key,
     required _i20.SectionLine sectionLine,
+    required int lineIndex,
+    required int sectionIndex,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
@@ -555,7 +580,10 @@ extension NavigatorStateExtension on _i22.NavigationService {
   }) async {
     return navigateTo<dynamic>(Routes.gardenSectionDetaillsView,
         arguments: GardenSectionDetaillsViewArguments(
-            key: key, sectionLine: sectionLine),
+            key: key,
+            sectionLine: sectionLine,
+            lineIndex: lineIndex,
+            sectionIndex: sectionIndex),
         id: routerId,
         preventDuplicates: preventDuplicates,
         parameters: parameters,
@@ -770,6 +798,7 @@ extension NavigatorStateExtension on _i22.NavigationService {
   Future<dynamic> replaceWithGardenSectionLinesView({
     _i18.Key? key,
     required _i20.GardenSection gardenSection,
+    required int sectionIndex,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
@@ -778,7 +807,7 @@ extension NavigatorStateExtension on _i22.NavigationService {
   }) async {
     return replaceWith<dynamic>(Routes.gardenSectionLinesView,
         arguments: GardenSectionLinesViewArguments(
-            key: key, gardenSection: gardenSection),
+            key: key, gardenSection: gardenSection, sectionIndex: sectionIndex),
         id: routerId,
         preventDuplicates: preventDuplicates,
         parameters: parameters,
@@ -788,6 +817,8 @@ extension NavigatorStateExtension on _i22.NavigationService {
   Future<dynamic> replaceWithGardenSectionDetaillsView({
     _i18.Key? key,
     required _i20.SectionLine sectionLine,
+    required int lineIndex,
+    required int sectionIndex,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
@@ -796,7 +827,10 @@ extension NavigatorStateExtension on _i22.NavigationService {
   }) async {
     return replaceWith<dynamic>(Routes.gardenSectionDetaillsView,
         arguments: GardenSectionDetaillsViewArguments(
-            key: key, sectionLine: sectionLine),
+            key: key,
+            sectionLine: sectionLine,
+            lineIndex: lineIndex,
+            sectionIndex: sectionIndex),
         id: routerId,
         preventDuplicates: preventDuplicates,
         parameters: parameters,

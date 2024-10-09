@@ -3,6 +3,7 @@ import 'package:drift/drift.dart';
 class Trees extends Table {
   TextColumn get id => text()(); // Primary key
   IntColumn get age => integer()();
+  IntColumn get number => integer()();
   TextColumn get type => text().references(TreeTypes, #id)(); // Foreign key
   TextColumn get sectionLineId =>
       text().references(GardenSections, #id)(); // Foreign key

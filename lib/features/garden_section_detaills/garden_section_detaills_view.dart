@@ -1,5 +1,6 @@
 import 'package:badr_agri/domain/garden_section.dart';
 import 'package:badr_agri/features/garden_section_detaills/widgets/tree_card.dart';
+import 'package:badr_agri/ui/widgets/common/appbar.dart';
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 
@@ -8,8 +9,14 @@ import 'garden_section_detaills_viewmodel.dart';
 class GardenSectionDetaillsView
     extends StackedView<GardenSectionDetaillsViewModel> {
   final SectionLine sectionLine;
-  const GardenSectionDetaillsView({Key? key, required this.sectionLine})
-      : super(key: key);
+  final int lineIndex;
+  final int sectionIndex;
+  const GardenSectionDetaillsView({
+    Key? key,
+    required this.sectionLine,
+    required this.lineIndex,
+    required this.sectionIndex,
+  }) : super(key: key);
 
   @override
   Widget builder(
@@ -18,6 +25,7 @@ class GardenSectionDetaillsView
     Widget? child,
   ) {
     return Scaffold(
+      appBar: const AppbarDefault(),
       backgroundColor: Theme.of(context).colorScheme.surface,
       body: Container(
         padding: const EdgeInsets.all(25.0),
@@ -28,7 +36,17 @@ class GardenSectionDetaillsView
               child: Padding(
                 padding: const EdgeInsets.all(10),
                 child: Text(
-                  "Line id : ${sectionLine.id}",
+                  "Line : $lineIndex",
+                  style: Theme.of(context).textTheme.displayMedium,
+                ),
+              ),
+            ),
+            Card(
+              color: Theme.of(context).cardColor,
+              child: Padding(
+                padding: const EdgeInsets.all(10),
+                child: Text(
+                  "Section : $sectionIndex",
                   style: Theme.of(context).textTheme.displayMedium,
                 ),
               ),
