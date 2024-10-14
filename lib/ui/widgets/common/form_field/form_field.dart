@@ -5,9 +5,12 @@ import 'form_field_model.dart';
 
 class AppFormField extends StackedView<AppFormFieldModel> {
   final String label;
-  final Function(String? value) onUpdate;
+  final Function(String? value)? onUpdate;
+  final bool disabled;
+  final TextEditingController? controller;
 
-  const AppFormField({super.key, required this.label, required this.onUpdate});
+  const AppFormField(
+      {super.key, required this.label, this.onUpdate, this.disabled = false,this.controller});
 
   @override
   Widget builder(
@@ -16,7 +19,9 @@ class AppFormField extends StackedView<AppFormFieldModel> {
     Widget? child,
   ) {
     return TextFormField(
+      readOnly: disabled,
       onChanged: onUpdate,
+      controller: controller,
       decoration: InputDecoration(
         labelText: label,
         labelStyle: TextStyle(

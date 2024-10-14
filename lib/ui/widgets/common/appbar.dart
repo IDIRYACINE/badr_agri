@@ -16,9 +16,14 @@ class AppbarDefault extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     return AppBar(
       leading: IconButton.filled(
-          onPressed: navigateToProfile, icon: const Icon(Icons.settings,color: Colors.white,)),
+          onPressed: navigateToProfile,
+          icon: const Icon(
+            Icons.settings,
+            color: Colors.white,
+          )),
     );
   }
-  
+
   @override
-  Size get preferredSize => const Size.fromHeight(kToolbarHeight);}
+  Size get preferredSize => const Size.fromHeight(kToolbarHeight);
+}

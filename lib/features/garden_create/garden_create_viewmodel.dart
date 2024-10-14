@@ -14,6 +14,7 @@ class GardenCreateViewModel extends BaseViewModel {
   String? name;
   double? surface;
   SurfaceType? type;
+  GpsCoordinates? gps;
 
   final List<Equipement> equipements = [];
 
@@ -50,7 +51,7 @@ class GardenCreateViewModel extends BaseViewModel {
         name: name ?? "named",
         id: databaseService.uuid.v4(),
         coordinates: GpsCoordinates(
-            latitude: 0, longitude: 0, id: databaseService.uuid.v4()),
+            latitude: gps?.latitude ?? 0, longitude: gps?.longitude ?? 0, id: databaseService.uuid.v4()),
         surface: Surface(
             id: databaseService.uuid.v4(),
             amount: surface ?? 20,
@@ -59,5 +60,9 @@ class GardenCreateViewModel extends BaseViewModel {
         sections: []);
 
     navigationService.back(result: garden);
+  }
+
+  void setGps(GpsCoordinates coordinates) {
+    gps =coordinates;
   }
 }

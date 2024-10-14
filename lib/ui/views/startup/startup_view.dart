@@ -14,12 +14,15 @@ class StartupView extends StackedView<StartupViewModel> {
     StartupViewModel viewModel,
     Widget? child,
   ) {
-    return  Scaffold(
+    return Scaffold(
       body: Center(
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Image.asset("assets/logo.png",width: 300,),
+            Image.asset(
+              "assets/logo.png",
+              width: 300,
+            ),
             const Row(
               mainAxisSize: MainAxisSize.min,
               children: [

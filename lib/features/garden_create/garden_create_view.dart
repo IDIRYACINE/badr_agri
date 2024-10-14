@@ -3,6 +3,7 @@ import 'package:badr_agri/features/garden_equipements/garden_equipements.dart';
 import 'package:badr_agri/ui/widgets/common/appbar.dart';
 import 'package:badr_agri/ui/widgets/common/form_field/form_field.dart';
 import 'package:badr_agri/ui/widgets/common/form_selector/form_selector.dart';
+import 'package:badr_agri/ui/widgets/common/map_field/map_field.dart';
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 
@@ -46,6 +47,7 @@ class GardenCreateView extends StackedView<GardenCreateViewModel> {
                 )
               ],
             ),
+            MapField(onGps:viewModel.setGps,),
             SizedBox(
                 height: 100,
                 child: GardenEquipements(initialData: viewModel.equipements)),
