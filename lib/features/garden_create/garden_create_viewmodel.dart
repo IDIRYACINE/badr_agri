@@ -5,6 +5,7 @@ import 'package:badr_agri/domain/garden.dart';
 import 'package:badr_agri/domain/location.dart';
 import 'package:badr_agri/domain/surface.dart';
 import 'package:badr_agri/infrastructure/database_service.dart';
+import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 
@@ -15,6 +16,8 @@ class GardenCreateViewModel extends BaseViewModel {
   double? surface;
   SurfaceType? type;
   GpsCoordinates? gps;
+  final gpsTextController = TextEditingController();
+
 
   final List<Equipement> equipements = [];
 

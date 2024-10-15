@@ -6,14 +6,17 @@ import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 
 class MapFieldModel extends BaseViewModel {
-  final textController = TextEditingController();
+  final TextEditingController controller = TextEditingController();
+
+  MapFieldModel();
 
   Future<void> onGpsClick() async {
     final navService = locator<NavigationService>();
 
-    final coordinates = await navService.replaceWithMapLocationView();
+    final coordinates = await navService.navigateToMapLocationView();
     if (coordinates is GpsCoordinates) {
-      textController.text = "${coordinates.latitude} , ${coordinates.longitude} ";
+      controller.text = "${coordinates.latitude} , ${coordinates.longitude} ";
     }
+
   }
 }

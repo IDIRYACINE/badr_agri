@@ -1,5 +1,7 @@
-import 'package:badr_agri/ui/widgets/common/appbar.dart';
+import 'package:badr_agri/app/themes.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_map/flutter_map.dart';
+import 'package:latlong2/latlong.dart';
 import 'package:stacked/stacked.dart';
 
 import 'map_location_viewmodel.dart';
@@ -14,11 +16,28 @@ class MapLocationView extends StackedView<MapLocationViewModel> {
     Widget? child,
   ) {
     return Scaffold(
-      appBar: const AppbarDefault(),
       backgroundColor: Theme.of(context).colorScheme.surface,
-      body: Container(
-        padding: const EdgeInsets.only(left: 25.0, right: 25.0),
-      ),
+      body: FlutterMap(
+          mapController: viewModel.mapController,
+          options: MapOptions(
+            center: const LatLng(
+                51.509364, -0.128928), // Center the map over London
+            zoom: 9.2,
+          ),
+          children: [
+            TileLayer(
+              // Display map tiles from any source
+              urlTemplate:
+                  'https://tile.openstreetmap.org/{z}/{x}/{y}.png', // OSMF's Tile Server
+              userAgentPackageName: 'com.example.app',
+              // And many more recommended properties!
+            ),
+          ]),
+      floatingActionButton: MaterialButton(
+          color: yellow,
+          textColor: Colors.white,
+          onPressed: viewModel.confirmLocation,
+          child: const Text("Confirm")),
     );
   }
 

@@ -1,4 +1,3 @@
-import 'package:badr_agri/ui/widgets/common/appbar.dart';
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 
@@ -14,13 +13,14 @@ class ProfileView extends StackedView<ProfileViewModel> {
     Widget? child,
   ) {
     return Scaffold(
-      appBar: const AppbarDefault(),
+      appBar: AppBar(),
       backgroundColor: Theme.of(context).colorScheme.surface,
       body: Container(
         padding: const EdgeInsets.only(left: 25.0, right: 25.0),
         child: Column(
           children: [
             OutlinedButton(
+              
                 onPressed: viewModel.logout, child: const Text("Logout"))
           ],
         ),

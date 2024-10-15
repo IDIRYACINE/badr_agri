@@ -1,6 +1,5 @@
 import 'package:badr_agri/domain/surface.dart';
 import 'package:badr_agri/features/garden_equipements/garden_equipements.dart';
-import 'package:badr_agri/ui/widgets/common/appbar.dart';
 import 'package:badr_agri/ui/widgets/common/form_field/form_field.dart';
 import 'package:badr_agri/ui/widgets/common/form_selector/form_selector.dart';
 import 'package:badr_agri/ui/widgets/common/map_field/map_field.dart';
@@ -11,7 +10,6 @@ import 'garden_create_viewmodel.dart';
 
 class GardenCreateView extends StackedView<GardenCreateViewModel> {
   const GardenCreateView({Key? key}) : super(key: key);
-
   @override
   Widget builder(
     BuildContext context,
@@ -19,7 +17,7 @@ class GardenCreateView extends StackedView<GardenCreateViewModel> {
     Widget? child,
   ) {
     return Scaffold(
-      appBar: const AppbarDefault(),
+      appBar: AppBar(),
       backgroundColor: Theme.of(context).colorScheme.surface,
       body: Container(
         padding: const EdgeInsets.all(25.0),
@@ -47,7 +45,7 @@ class GardenCreateView extends StackedView<GardenCreateViewModel> {
                 )
               ],
             ),
-            MapField(onGps:viewModel.setGps,),
+            MapField(onGps:viewModel.setGps, ),
             SizedBox(
                 height: 100,
                 child: GardenEquipements(initialData: viewModel.equipements)),

@@ -1,7 +1,6 @@
 import 'package:badr_agri/domain/planting_mode.dart';
 import 'package:badr_agri/domain/tree_type.dart';
 import 'package:badr_agri/features/tree_medical_history/tree_medical_history_view.dart';
-import 'package:badr_agri/ui/widgets/common/appbar.dart';
 import 'package:badr_agri/ui/widgets/common/form_field/form_field.dart';
 import 'package:badr_agri/ui/widgets/common/form_selector/form_selector.dart';
 import 'package:flutter/material.dart';
@@ -19,7 +18,7 @@ class GardenSectionCreateView
     Widget? child,
   ) {
     return Scaffold(
-      appBar: const AppbarDefault(),
+      appBar: AppBar(),
       backgroundColor: Theme.of(context).colorScheme.surface,
       body: Container(
         padding: const EdgeInsets.all(25.0),
