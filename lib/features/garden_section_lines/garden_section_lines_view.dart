@@ -1,6 +1,5 @@
 import 'package:badr_agri/domain/garden_section.dart';
 import 'package:badr_agri/features/garden_section_lines/widgets/garden_section_line_card.dart';
-import 'package:badr_agri/ui/widgets/common/appbar.dart';
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 
@@ -20,7 +19,7 @@ class GardenSectionLinesView extends StackedView<GardenSectionLinesViewModel> {
     Widget? child,
   ) {
     return Scaffold(
-      appBar: const AppbarDefault(),
+      appBar: AppBar(),
       backgroundColor: Theme.of(context).colorScheme.surface,
       body: Container(
         padding: const EdgeInsets.all(25.0),

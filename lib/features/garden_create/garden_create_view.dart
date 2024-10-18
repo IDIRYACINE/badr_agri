@@ -39,13 +39,17 @@ class GardenCreateView extends StackedView<GardenCreateViewModel> {
                 Expanded(
                   flex: 1,
                   child: FormSelector(
-                      data: SurfaceType.values,
-                      readLabel: (v) => v.name,
-                      onChanged: viewModel.setSurfaceType),
+                    data: SurfaceType.values,
+                    readLabel: (v) => v.name,
+                    onChanged: viewModel.setSurfaceType,
+                    label: 'Surface type',
+                  ),
                 )
               ],
             ),
-            MapField(onGps:viewModel.setGps, ),
+            MapField(
+              onGps: viewModel.setGps,
+            ),
             SizedBox(
                 height: 100,
                 child: GardenEquipements(initialData: viewModel.equipements)),

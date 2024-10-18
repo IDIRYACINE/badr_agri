@@ -48,12 +48,16 @@ class DatabaseRepository {
             ..where((h) => h.treeId.equals(tree.id)))
           .get();
 
-      final history = treeHistoryQuery.map((historyRecord) async {
-        // Load the history option name
+      final historyFutures = treeHistoryQuery.map((historyRecord) async {
+        // Load the history option name, but handle cases where no record is found
         final historyOptionQuery = await (db.select(db.treeHistoryOptions)
               ..where((option) =>
                   option.id.equals(historyRecord.treeHistoryOptionId)))
-            .getSingle();
+            .getSingleOrNull(); // Use getSingleOrNull to avoid the exception
+
+        if (historyOptionQuery == null) {
+          return null; // Return null if no matching option is found
+        }
 
         return tree_history.TreeHistory(
           id: historyRecord.id,
@@ -62,6 +66,15 @@ class DatabaseRepository {
         );
       }).toList();
 
+// Wait for all history futures to complete
+      final historyList = await Future.wait(historyFutures);
+
+// Filter out the null values after awaiting the futures
+      final history = historyList
+          .where((item) => item != null)
+          .cast<tree_history.TreeHistory>()
+          .toList();
+
       // Create and return the Tree object with the loaded dependencies
       return tree_domain.Tree(
         number: tree.number,
@@ -69,7 +82,7 @@ class DatabaseRepository {
         type: treeType!, // Assign the loaded TreeType
         age: tree.age,
         subType: treeSubType!, // Assign the loaded TreeSubType
-        histroy: await Future.wait(history), // Wait for the history to load
+        histroy: history, // Wait for the history to load
       );
     }).toList());
 

@@ -43,8 +43,6 @@ class AppFormField extends StackedView<AppFormFieldModel> {
             width: 2.5,
           ),
         ),
-        prefixIcon: Icon(Icons.text_fields,
-            color: Theme.of(context).colorScheme.primary),
         hintText: label,
         hintStyle: const TextStyle(color: Colors.grey),
         filled: true,

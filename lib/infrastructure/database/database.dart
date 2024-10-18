@@ -70,6 +70,21 @@ class AppDatabase extends _$AppDatabase {
               PlantingModesCompanion.insert(id: 'crowded', name: 'Crowded'),
               PlantingModesCompanion.insert(id: 'spaced', name: 'Spaced'),
             ]);
+
+            batch.insertAll(treeHistoryOptions, [
+              TreeHistoryOptionsCompanion.insert(
+                  id: "cultural_practices", name: "Cultural Practices"),
+              TreeHistoryOptionsCompanion.insert(
+                  id: "fertalisers", name: "Fertalisation"),
+              TreeHistoryOptionsCompanion.insert(
+                  id: "phito_sanitaire", name: "Sanitizer Phito"),
+              TreeHistoryOptionsCompanion.insert(
+                  id: "sickness", name: "Sicknesses"),
+              TreeHistoryOptionsCompanion.insert(
+                  id: "ligration", name: "Ligration"),
+              TreeHistoryOptionsCompanion.insert(
+                  id: "production", name: "Production")
+            ]);
           });
         },
       );

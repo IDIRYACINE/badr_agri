@@ -46,7 +46,7 @@ class GardenSectionsViewModel extends BaseViewModel {
                 db_domain.TreeHistoriesCompanion.insert(
                     id: history.id,
                     treeId: tree.id,
-                    treeHistoryOptionId: history.id));
+                    treeHistoryOptionId: history.option.id));
           }
         }
       }

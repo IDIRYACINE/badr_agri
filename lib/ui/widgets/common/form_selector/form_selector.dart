@@ -7,8 +7,10 @@ class FormSelector<T> extends StackedView<FormSelectorModel> {
   final List<T> data;
   final String Function(T) readLabel;
   final void Function(T?) onChanged;
+  final String label;
   const FormSelector(
       {super.key,
+      required this.label,
       required this.data,
       required this.readLabel,
       required this.onChanged});
@@ -36,10 +38,18 @@ class FormSelector<T> extends StackedView<FormSelectorModel> {
     FormSelectorModel viewModel,
     Widget? child,
   ) {
-    return DropdownButton(
+    return Row(
+      children: [
+        Text(
+          label
+        ),
+        const SizedBox(width: 10,),
+        DropdownButton(
         items: buildItems(),
         value: viewModel.selection,
-        onChanged: (e) => handleSelection(viewModel, e as T?));
+        onChanged: (e) => handleSelection(viewModel, e as T?))
+      ],
+    );
   }
 
   @override
