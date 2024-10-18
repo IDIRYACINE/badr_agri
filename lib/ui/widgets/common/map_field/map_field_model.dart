@@ -17,6 +17,5 @@ class MapFieldModel extends BaseViewModel {
     if (coordinates is GpsCoordinates) {
       controller.text = "${coordinates.latitude} , ${coordinates.longitude} ";
     }
-
   }
 }

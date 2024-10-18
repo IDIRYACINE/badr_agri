@@ -13,6 +13,7 @@ dependencies:
     sdk: flutter
   flutter_map: ^5.0.0
   latlong2: ^0.9.1
+  mobile_scanner: ^6.0.1
   qr_flutter: ^4.1.0
   sqlite3_flutter_libs: ^0.5.24
   stacked: ^3.4.0

@@ -20,7 +20,6 @@ class ProfileView extends StackedView<ProfileViewModel> {
         child: Column(
           children: [
             OutlinedButton(
-              
                 onPressed: viewModel.logout, child: const Text("Logout"))
           ],
         ),

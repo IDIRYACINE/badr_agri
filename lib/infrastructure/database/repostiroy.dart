@@ -201,4 +201,77 @@ class DatabaseRepository {
 
     return gardenList;
   }
+
+  Future<tree_domain.Tree?> loadTree(String treeId) async {
+    // Load the tree record from the database
+    final treeQuery = await (db.select(db.trees)
+          ..where((t) => t.id.equals(treeId)))
+        .getSingleOrNull(); // Use getSingleOrNull to handle cases where no tree is found
+
+    if (treeQuery == null) {
+      return null; // Return null if no tree is found
+    }
+
+    // Load the tree type
+    final typeQuery = await (db.select(db.treeTypes)
+          ..where((treeType) => treeType.id.equals(treeQuery.type)))
+        .get();
+
+    final treeType = typeQuery.isNotEmpty
+        ? tree_domain.TreeType(
+            id: typeQuery.first.id, name: typeQuery.first.name)
+        : null;
+
+    // Load the tree subtype
+    final subTypeQuery = await (db.select(db.treeSubTypes)
+          ..where((subType) => subType.id.equals(treeQuery.subType)))
+        .get();
+
+    final treeSubType = subTypeQuery.isNotEmpty
+        ? tree_domain.TreeSubType(
+            id: subTypeQuery.first.id, name: subTypeQuery.first.name)
+        : null;
+
+    // Load the tree history
+    final treeHistoryQuery = await (db.select(db.treeHistories)
+          ..where((h) => h.treeId.equals(treeId)))
+        .get();
+
+    final historyFutures = treeHistoryQuery.map((historyRecord) async {
+      // Load the history option name, handle cases where no record is found
+      final historyOptionQuery = await (db.select(db.treeHistoryOptions)
+            ..where((option) =>
+                option.id.equals(historyRecord.treeHistoryOptionId)))
+          .getSingleOrNull();
+
+      if (historyOptionQuery == null) {
+        return null;
+      }
+
+      return tree_history.TreeHistory(
+        id: historyRecord.id,
+        option: tree_history.TreeHistoryOption(
+            id: historyOptionQuery.id, name: historyOptionQuery.name),
+      );
+    }).toList();
+
+    // Wait for all history futures to complete
+    final historyList = await Future.wait(historyFutures);
+
+    // Filter out the null values after awaiting the futures
+    final history = historyList
+        .where((item) => item != null)
+        .cast<tree_history.TreeHistory>()
+        .toList();
+
+    // Return the Tree object with the loaded dependencies
+    return tree_domain.Tree(
+      number: treeQuery.number,
+      id: treeQuery.id,
+      type: treeType!, // Assign the loaded TreeType
+      age: treeQuery.age,
+      subType: treeSubType!, // Assign the loaded TreeSubType
+      histroy: history, // Assign the history
+    );
+  }
 }

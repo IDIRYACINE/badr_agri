@@ -18,7 +18,6 @@ class GardenCreateViewModel extends BaseViewModel {
   GpsCoordinates? gps;
   final gpsTextController = TextEditingController();
 
-
   final List<Equipement> equipements = [];
 
   String readCultureTypeLabel(CultureType ct) {
@@ -54,7 +53,9 @@ class GardenCreateViewModel extends BaseViewModel {
         name: name ?? "named",
         id: databaseService.uuid.v4(),
         coordinates: GpsCoordinates(
-            latitude: gps?.latitude ?? 0, longitude: gps?.longitude ?? 0, id: databaseService.uuid.v4()),
+            latitude: gps?.latitude ?? 0,
+            longitude: gps?.longitude ?? 0,
+            id: databaseService.uuid.v4()),
         surface: Surface(
             id: databaseService.uuid.v4(),
             amount: surface ?? 20,
@@ -66,6 +67,6 @@ class GardenCreateViewModel extends BaseViewModel {
   }
 
   void setGps(GpsCoordinates coordinates) {
-    gps =coordinates;
+    gps = coordinates;
   }
 }

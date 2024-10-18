@@ -11,7 +11,12 @@ class AppFormField extends StackedView<AppFormFieldModel> {
   final TextEditingController? controller;
 
   const AppFormField(
-      {super.key, required this.label,this.onTap, this.onUpdate, this.disabled = false,this.controller});
+      {super.key,
+      required this.label,
+      this.onTap,
+      this.onUpdate,
+      this.disabled = false,
+      this.controller});
 
   @override
   Widget builder(

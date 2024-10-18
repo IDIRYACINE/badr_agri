@@ -12,15 +12,36 @@ class AppbarDefault extends StatelessWidget implements PreferredSizeWidget {
     navService.navigateToProfileView();
   }
 
+  void scanQr() {
+     final navService = locator<NavigationService>();
+
+    navService.navigateToQrScannerView();
+  }
+
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      leading: IconButton.filled(
-          onPressed: navigateToProfile,
-          icon: const Icon(
-            Icons.settings,
-            color: Colors.white,
-          )),
+      title: Row(
+        children: [
+          IconButton.filled(
+            onPressed: navigateToProfile,
+            icon: const Icon(
+              Icons.settings,
+              color: Colors.white,
+            ),
+          ),
+          const SizedBox(
+            width: 10,
+          ),
+          IconButton.filled(
+            onPressed: scanQr,
+            icon: const Icon(
+              Icons.camera,
+              color: Colors.white,
+            ),
+          ),
+        ],
+      ),
     );
   }
 

@@ -40,14 +40,14 @@ class FormSelector<T> extends StackedView<FormSelectorModel> {
   ) {
     return Row(
       children: [
-        Text(
-          label
+        Text(label),
+        const SizedBox(
+          width: 10,
         ),
-        const SizedBox(width: 10,),
         DropdownButton(
-        items: buildItems(),
-        value: viewModel.selection,
-        onChanged: (e) => handleSelection(viewModel, e as T?))
+            items: buildItems(),
+            value: viewModel.selection,
+            onChanged: (e) => handleSelection(viewModel, e as T?))
       ],
     );
   }

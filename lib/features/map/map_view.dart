@@ -21,8 +21,8 @@ class MapView extends StackedView<MapViewModel> {
         child: FlutterMap(
           mapController: viewModel.mapController,
           options: MapOptions(
-            center:
-                const LatLng(51.509364, -0.128928), // Center the map over London
+            center: const LatLng(
+                51.509364, -0.128928), // Center the map over London
             zoom: 9.2,
           ),
           children: [
@@ -36,11 +36,11 @@ class MapView extends StackedView<MapViewModel> {
             const MarkerLayer(
               markers: [],
             )
-            
           ],
         ),
       ),
-      floatingActionButton: OutlinedButton(onPressed:viewModel.confirm, child: const Text("Confirm")),
+      floatingActionButton: OutlinedButton(
+          onPressed: viewModel.confirm, child: const Text("Confirm")),
     );
   }
 

@@ -9,7 +9,10 @@ class MapViewModel extends BaseViewModel {
   void confirm() {
     final nav = locator<NavigationService>();
 
-    final gps = GpsCoordinates(id: "id", latitude: mapController.center.latitude, longitude: mapController.center.longitude);
-    nav.back(result:gps);
+    final gps = GpsCoordinates(
+        id: "id",
+        latitude: mapController.center.latitude,
+        longitude: mapController.center.longitude);
+    nav.back(result: gps);
   }
 }

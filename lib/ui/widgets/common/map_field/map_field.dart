@@ -5,9 +5,8 @@ import 'package:stacked/stacked.dart';
 import 'map_field_model.dart';
 
 class MapField extends StackedView<MapFieldModel> {
-  
   final void Function(GpsCoordinates coordinates) onGps;
-  const MapField( {
+  const MapField({
     super.key,
     required this.onGps,
   });
@@ -19,10 +18,10 @@ class MapField extends StackedView<MapFieldModel> {
     Widget? child,
   ) {
     return AppFormField(
-        label: "Gps",
-        disabled: true,
-        onTap:viewModel.onGpsClick,
-        controller: viewModel.controller,
+      label: "Gps",
+      disabled: true,
+      onTap: viewModel.onGpsClick,
+      controller: viewModel.controller,
     );
   }
 

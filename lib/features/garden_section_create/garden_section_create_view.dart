@@ -67,7 +67,8 @@ class GardenSectionCreateView
             const SizedBox(
               height: 10,
             ),
-             Text("Trees medical history",style: Theme.of(context).textTheme.bodyLarge),
+            Text("Trees medical history",
+                style: Theme.of(context).textTheme.bodyLarge),
             Expanded(
                 child: TreeMedicalHistoryView(
               tree: viewModel.treeHistory,
