@@ -1,3 +1,6 @@
+import 'package:badr_agri/domain/garden.dart';
+import 'package:badr_agri/features/garden_equipements/equipement_card.dart';
+import 'package:badr_agri/features/garden_report/widgets/report_card.dart';
 import 'package:badr_agri/ui/widgets/common/appbar.dart';
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
@@ -5,7 +8,11 @@ import 'package:stacked/stacked.dart';
 import 'garden_report_viewmodel.dart';
 
 class GardenReportView extends StackedView<GardenReportViewModel> {
-  const GardenReportView({Key? key}) : super(key: key);
+  final Garden garden;
+  const GardenReportView({
+    Key? key,
+    required this.garden,
+  }) : super(key: key);
 
   @override
   Widget builder(
@@ -17,7 +24,20 @@ class GardenReportView extends StackedView<GardenReportViewModel> {
       appBar: const AppbarDefault(),
       backgroundColor: Theme.of(context).colorScheme.surface,
       body: Container(
-        padding: const EdgeInsets.only(left: 25.0, right: 25.0),
+        padding: const EdgeInsets.all(25.0),
+        child: Column(
+          children: [
+            ReportCard(garden: garden),
+            Expanded(
+              child: ListView.builder(
+                itemCount: garden.equipements.length,
+                itemBuilder: (ctx, idx) => EquipementCard(
+                    equipement: garden.equipements[idx],
+                    onDismissed: viewModel.onDismissed),
+              ),
+            )
+          ],
+        ),
       ),
     );
   }

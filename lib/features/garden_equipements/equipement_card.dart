@@ -14,13 +14,15 @@ class EquipementCard extends StatelessWidget {
       key: Key(equipement.id),
       onDismissed: (direction) => onDismissed(equipement),
       child: Card(
-        margin: const EdgeInsets.all(10),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text(equipement.name),
-            Text(equipement.quantity.toString())
-          ],
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(equipement.name),
+              Text(equipement.quantity.toString())
+            ],
+          ),
         ),
       ),
     );

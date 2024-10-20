@@ -36,7 +36,7 @@ class ProfileViewModel extends BaseViewModel {
 
       await (db.update(db.users)..where((u) => u.id.equals(userAuth.id))).write(
         UsersCompanion(
-            fullname: Value(fullName), 
+            fullname: Value(fullName),
             phoneNumber: Value(phone),
             address: Value(address)),
       );

@@ -19,7 +19,7 @@ class ProfileView extends StackedView<ProfileViewModel> {
       appBar: AppBar(),
       backgroundColor: Theme.of(context).colorScheme.surface,
       body: Container(
-        padding: const EdgeInsets.all( 25.0),
+        padding: const EdgeInsets.all(25.0),
         child: Column(
           children: [
             AppFormField(

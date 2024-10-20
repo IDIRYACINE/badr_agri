@@ -262,8 +262,10 @@ class StackedRouter extends _i1.RouterBase {
       );
     },
     _i14.GardenReportView: (data) {
+      final args = data.getArgs<GardenReportViewArguments>(nullOk: false);
       return _i20.MaterialPageRoute<dynamic>(
-        builder: (context) => const _i14.GardenReportView(),
+        builder: (context) =>
+            _i14.GardenReportView(key: args.key, garden: args.garden),
         settings: data,
       );
     },
@@ -433,6 +435,33 @@ class TreeMedicalHistoryViewArguments {
   @override
   int get hashCode {
     return tree.hashCode ^ key.hashCode;
+  }
+}
+
+class GardenReportViewArguments {
+  const GardenReportViewArguments({
+    this.key,
+    required this.garden,
+  });
+
+  final _i20.Key? key;
+
+  final _i21.Garden garden;
+
+  @override
+  String toString() {
+    return '{"key": "$key", "garden": "$garden"}';
+  }
+
+  @override
+  bool operator ==(covariant GardenReportViewArguments other) {
+    if (identical(this, other)) return true;
+    return other.key == key && other.garden == garden;
+  }
+
+  @override
+  int get hashCode {
+    return key.hashCode ^ garden.hashCode;
   }
 }
 
@@ -674,14 +703,17 @@ extension NavigatorStateExtension on _i24.NavigationService {
         transition: transition);
   }
 
-  Future<dynamic> navigateToGardenReportView([
+  Future<dynamic> navigateToGardenReportView({
+    _i20.Key? key,
+    required _i21.Garden garden,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
     Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
         transition,
-  ]) async {
+  }) async {
     return navigateTo<dynamic>(Routes.gardenReportView,
+        arguments: GardenReportViewArguments(key: key, garden: garden),
         id: routerId,
         preventDuplicates: preventDuplicates,
         parameters: parameters,
@@ -951,14 +983,17 @@ extension NavigatorStateExtension on _i24.NavigationService {
         transition: transition);
   }
 
-  Future<dynamic> replaceWithGardenReportView([
+  Future<dynamic> replaceWithGardenReportView({
+    _i20.Key? key,
+    required _i21.Garden garden,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
     Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
         transition,
-  ]) async {
+  }) async {
     return replaceWith<dynamic>(Routes.gardenReportView,
+        arguments: GardenReportViewArguments(key: key, garden: garden),
         id: routerId,
         preventDuplicates: preventDuplicates,
         parameters: parameters,

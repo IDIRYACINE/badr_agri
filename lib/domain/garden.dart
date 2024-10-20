@@ -1,5 +1,6 @@
 import 'package:badr_agri/domain/garden_section.dart';
 import 'package:badr_agri/domain/location.dart';
+import 'package:badr_agri/domain/planting_mode.dart';
 
 import 'equipements.dart';
 import 'surface.dart';
@@ -45,5 +46,37 @@ class Garden {
         surface: Surface(amount: 23, type: SurfaceType.h, id: 'id'),
         equipements: [],
         sections: []);
+  }
+
+  double caluclateSurfaceFertilizer() {
+    double result = 0;
+    bool intensif = sections.first.plantingMode.id == PlantingMode.modes[0].id;
+    double area = surface.normalize();
+
+    if (intensif) {
+      result = area * 12;
+    } else {
+      result = area * 5;
+    }
+
+    return result;
+  }
+
+  double caluclateTreeFertilizer() {
+    double result = 0;
+
+    for (GardenSection section in sections) {
+      int sectionTreesCount =
+          section.lines.length * section.lines[0].trees.length;
+      bool intensif = section.plantingMode.id == PlantingMode.modes[0].id;
+
+      if (intensif) {
+        result = sectionTreesCount * 1.5;
+      } else {
+        result = sectionTreesCount * 1.25;
+      }
+    }
+
+    return result;
   }
 }
