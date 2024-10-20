@@ -13,7 +13,7 @@ class AppbarDefault extends StatelessWidget implements PreferredSizeWidget {
   }
 
   void scanQr() {
-     final navService = locator<NavigationService>();
+    final navService = locator<NavigationService>();
 
     navService.navigateToQrScannerView();
   }

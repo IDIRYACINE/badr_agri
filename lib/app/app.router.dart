@@ -294,8 +294,11 @@ class StackedRouter extends _i1.RouterBase {
       );
     },
     _i19.QrScannerView: (data) {
+      final args = data.getArgs<QrScannerViewArguments>(
+        orElse: () => const QrScannerViewArguments(),
+      );
       return _i20.MaterialPageRoute<dynamic>(
-        builder: (context) => const _i19.QrScannerView(),
+        builder: (context) => _i19.QrScannerView(key: args.key),
         settings: data,
       );
     },
@@ -457,6 +460,28 @@ class TreeDetailsViewArguments {
   @override
   int get hashCode {
     return key.hashCode ^ tree.hashCode;
+  }
+}
+
+class QrScannerViewArguments {
+  const QrScannerViewArguments({this.key});
+
+  final _i20.Key? key;
+
+  @override
+  String toString() {
+    return '{"key": "$key"}';
+  }
+
+  @override
+  bool operator ==(covariant QrScannerViewArguments other) {
+    if (identical(this, other)) return true;
+    return other.key == key;
+  }
+
+  @override
+  int get hashCode {
+    return key.hashCode;
   }
 }
 
@@ -722,14 +747,16 @@ extension NavigatorStateExtension on _i24.NavigationService {
         transition: transition);
   }
 
-  Future<dynamic> navigateToQrScannerView([
+  Future<dynamic> navigateToQrScannerView({
+    _i20.Key? key,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
     Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
         transition,
-  ]) async {
+  }) async {
     return navigateTo<dynamic>(Routes.qrScannerView,
+        arguments: QrScannerViewArguments(key: key),
         id: routerId,
         preventDuplicates: preventDuplicates,
         parameters: parameters,
@@ -997,14 +1024,16 @@ extension NavigatorStateExtension on _i24.NavigationService {
         transition: transition);
   }
 
-  Future<dynamic> replaceWithQrScannerView([
+  Future<dynamic> replaceWithQrScannerView({
+    _i20.Key? key,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
     Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
         transition,
-  ]) async {
+  }) async {
     return replaceWith<dynamic>(Routes.qrScannerView,
+        arguments: QrScannerViewArguments(key: key),
         id: routerId,
         preventDuplicates: preventDuplicates,
         parameters: parameters,
